@@ -16,5 +16,6 @@ Servers/
 .DS_Store
 
 # Java #
-.jar
-.class
+*.jar
+*.class
+*.zip
