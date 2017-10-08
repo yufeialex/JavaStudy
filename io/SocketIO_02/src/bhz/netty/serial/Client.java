@@ -37,14 +37,16 @@ public class Client {
 			Req req = new Req();
 			req.setId("" + i);
 			req.setName("pro" + i);
-			req.setRequestMessage("数据信息" + i);	
-			String path = System.getProperty("user.dir") + File.separatorChar + "sources" +  File.separatorChar + "001.jpg";
+			req.setRequestMessage("数据信息" + i);
+
+			/*String path = System.getProperty("user.dir") + File.separatorChar + "sources" +  File.separatorChar + "001.jpg";
 			File file = new File(path);
 	        FileInputStream in = new FileInputStream(file);  
 	        byte[] data = new byte[in.available()];  
 	        in.read(data);  
 	        in.close(); 
-			req.setAttachment(GzipUtils.gzip(data));
+			req.setAttachment(GzipUtils.gzip(data));*/
+
 			cf.channel().writeAndFlush(req);
 		}
 

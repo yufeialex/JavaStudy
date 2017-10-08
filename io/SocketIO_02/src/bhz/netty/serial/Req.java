@@ -2,6 +2,9 @@ package bhz.netty.serial;
 
 import java.io.Serializable;
 
+/**
+ * req和resp在服务器和客户端都必须有，而且路径一样
+ */
 public class Req implements Serializable{
 
 	private static final long  SerialVersionUID = 1L;

@@ -35,7 +35,7 @@ public class NioServer1 {
     //缓冲区     
     private ByteBuffer buf = ByteBuffer.allocate(512);  
       
-    public NioServer() {  
+    public NioServer1() {
         init();  
     }  
   

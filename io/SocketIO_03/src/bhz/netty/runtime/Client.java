@@ -18,7 +18,8 @@ import java.util.concurrent.TimeUnit;
  * Best Do It
  */
 public class Client {
-	
+
+	// 单例模式
 	private static class SingletonHolder {
 		static final Client instance = new Client();
 	}

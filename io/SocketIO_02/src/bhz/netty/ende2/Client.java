@@ -35,6 +35,7 @@ public class Client {
 		ChannelFuture cf = b.connect("127.0.0.1", 8765).sync();
 		
 		cf.channel().writeAndFlush(Unpooled.wrappedBuffer("aaaaabbbbb".getBytes()));
+		// 不够的时候要自己补位，比如7个C后面加3个空格
 		cf.channel().writeAndFlush(Unpooled.copiedBuffer("ccccccc".getBytes()));
 		
 		//等待客户端端口关闭

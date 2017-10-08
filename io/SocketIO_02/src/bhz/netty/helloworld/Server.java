@@ -34,10 +34,18 @@ public class Server {
 			}
 		});
 		
-		//4 进行绑定 
+		//4 进行绑定
+        /**
+         * sync方法
+         * Waits for this future until it is done, and rethrows the cause of the failure if this future
+         * failed.
+         */
 		ChannelFuture cf1 = b.bind(8765).sync();
+		// 开多个端口接收，效率高。一个端口一个类型数据也可以；公用一套配置；最后的处理器也是一套；接收能力变强，处理能力不变；漏斗的口变大
 		//ChannelFuture cf2 = b.bind(8764).sync();
+
 		//5 等待关闭
+//        Thread.sleep(Integer.MAX_VALUE); 和这句话等效
 		cf1.channel().closeFuture().sync();
 		//cf2.channel().closeFuture().sync();
 		pGroup.shutdownGracefully();

@@ -2,6 +2,7 @@ package com.bjsxt.base.conn010;
 
 public class ConnThreadLocal {
 
+	// 一般来说，类的static字段就是共享的，但是多线程的时候，不希望大家都修改同一个，希望各自是各自的，那么就用threadlocal，给这个域多个分身
 	public static ThreadLocal<String> th = new ThreadLocal<>();
 	
 	public void setTh(String value){
