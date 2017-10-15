@@ -1,6 +1,4 @@
-package com.yufei.languagebasic.io.SocketIO_02.netty.ende1;
-
-import java.nio.ByteBuffer;
+package com.yufei.languagebasic.io.SocketIO_02.netty.packet1;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -13,9 +11,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.FixedLengthFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
 
 public class Server {
 
@@ -34,10 +30,10 @@ public class Server {
 		 .childHandler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			protected void initChannel(SocketChannel sc) throws Exception {
-				//设置特殊分隔符
+				// 设置特殊分隔符
 				ByteBuf buf = Unpooled.copiedBuffer("$_".getBytes());
 				sc.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, buf));
-				//设置字符串形式的解码
+				// 设置字符串形式的解码
 				sc.pipeline().addLast(new StringDecoder());
 				// pipeline就是让你按照顺序处理，先通过分隔符分割内容，然后对内容从buf转换成字符串，最后是自己的处理逻辑
 				sc.pipeline().addLast(new ServerHandler());

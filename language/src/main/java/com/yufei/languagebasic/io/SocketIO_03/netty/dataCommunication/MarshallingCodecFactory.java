@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.io.SocketIO_03.netty.runtime;
+package com.yufei.languagebasic.io.SocketIO_03.netty.dataCommunication;
 
 import io.netty.handler.codec.marshalling.DefaultMarshallerProvider;
 import io.netty.handler.codec.marshalling.DefaultUnmarshallerProvider;
@@ -16,7 +16,7 @@ import org.jboss.marshalling.MarshallingConfiguration;
  * @author（alienware）
  * @since 2014-12-16
  */
-public final class MarshallingCodeCFactory {
+public final class MarshallingCodecFactory {
 
     /**
      * 创建Jboss Marshalling解码器MarshallingDecoder
@@ -24,7 +24,7 @@ public final class MarshallingCodeCFactory {
      */
     public static MarshallingDecoder buildMarshallingDecoder() {
     	//首先通过Marshalling工具类的精通方法获取Marshalling实例对象 参数serial标识创建的是java序列化工厂对象。
-		final MarshallerFactory marshallerFactory = Marshalling.getProvidedMarshallerFactory("serial");
+		final MarshallerFactory marshallerFactory = Marshalling.getProvidedMarshallerFactory("serialization");
 		//创建了MarshallingConfiguration对象，配置了版本号为5 
 		final MarshallingConfiguration configuration = new MarshallingConfiguration();
 		configuration.setVersion(5);
@@ -40,7 +40,7 @@ public final class MarshallingCodeCFactory {
      * @return MarshallingEncoder
      */
     public static MarshallingEncoder buildMarshallingEncoder() {
-		final MarshallerFactory marshallerFactory = Marshalling.getProvidedMarshallerFactory("serial");
+		final MarshallerFactory marshallerFactory = Marshalling.getProvidedMarshallerFactory("serialization");
 		final MarshallingConfiguration configuration = new MarshallingConfiguration();
 		configuration.setVersion(5);
 		MarshallerProvider provider = new DefaultMarshallerProvider(marshallerFactory, configuration);

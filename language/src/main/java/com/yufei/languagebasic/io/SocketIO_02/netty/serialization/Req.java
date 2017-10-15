@@ -1,14 +1,18 @@
-package com.yufei.languagebasic.io.SocketIO_03.netty.runtime;
+package com.yufei.languagebasic.io.SocketIO_02.netty.serialization;
 
 import java.io.Serializable;
 
-public class Request implements Serializable{
+/**
+ * req和resp在服务器和客户端都必须有，而且路径一样
+ */
+public class Req implements Serializable{
 
 	private static final long  SerialVersionUID = 1L;
 	
 	private String id ;
 	private String name ;
 	private String requestMessage ;
+	private byte[] attachment;
 	
 	public String getId() {
 		return id;
@@ -28,6 +32,14 @@ public class Request implements Serializable{
 	public void setRequestMessage(String requestMessage) {
 		this.requestMessage = requestMessage;
 	}
+	public byte[] getAttachment() {
+		return attachment;
+	}
+	public void setAttachment(byte[] attachment) {
+		this.attachment = attachment;
+	}
+	
+	
 
 
 }

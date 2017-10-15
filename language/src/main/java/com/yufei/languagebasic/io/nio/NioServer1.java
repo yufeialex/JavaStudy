@@ -14,7 +14,7 @@ import java.util.Iterator;
  * TCP/IP的NIO非阻塞方式   
  * 服务器端   
  * */
-public class NioServer1 {
+public class NioServer1 implements Runnable{
 
     //第一个端口     
     private Integer port1 = 8099;  
@@ -161,7 +161,7 @@ public class NioServer1 {
     }  
   
     public static void main(String[] args) {  
-    	NioServer server = new NioServer();  
+    	NioServer1 server = new NioServer1();
         Thread thread = new Thread(server);  
         thread.start();  
     } 

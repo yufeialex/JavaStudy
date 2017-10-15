@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.io.SocketIO_02.netty.ende2;
+package com.yufei.languagebasic.io.SocketIO_02.netty.packet2;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerAdapter;

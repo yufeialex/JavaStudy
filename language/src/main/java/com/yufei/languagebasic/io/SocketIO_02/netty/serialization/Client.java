@@ -1,5 +1,6 @@
-package com.yufei.languagebasic.io.SocketIO_02.netty.serial;
+package com.yufei.languagebasic.io.SocketIO_02.netty.serialization;
 
+import com.yufei.languagebasic.io.SocketIO_03.netty.dataCommunication.MarshallingCodecFactory;
 import com.yufei.languagebasic.io.SocketIO_03.utils.GzipUtils;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -23,8 +24,8 @@ public class Client {
 		 .handler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			protected void initChannel(SocketChannel sc) throws Exception {
-				sc.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingDecoder());
-				sc.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingEncoder());
+				sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingDecoder());
+				sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingEncoder());
 				sc.pipeline().addLast(new ClientHandler());
 			}
 		});

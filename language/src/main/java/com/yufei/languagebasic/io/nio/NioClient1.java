@@ -39,7 +39,7 @@ public class NioClient1 {
     }  
   
     public static void main(String[] args) throws IOException {  
-        new NioClient().query("localhost", 8099);  
+        new NioClient1().query("localhost", 8099);
   
     }  
 
