@@ -6,7 +6,7 @@ package com.yufei.languagebasic.concurrent.Multi_002.conn010;
  */
 public class ThreadLocalStudy {
 
-    public static ThreadLocal<String> name = new ThreadLocal<String>() {
+    private static ThreadLocal<String> name = new ThreadLocal<String>() {
         @Override
         protected String initialValue() {
             return "default";
