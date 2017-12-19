@@ -37,15 +37,28 @@ public class UseCondition {
 			lock.unlock();
 		}
 	}
+
+	public void method3(){
+		try {
+			lock.lock();
+			System.out.println("当前线程：" + Thread.currentThread().getName() + "进入..");
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock();
+		}
+	}
 	
 	public static void main(String[] args) {
 		
 		final UseCondition uc = new UseCondition();
 		Thread t1 = new Thread(uc::method1, "t1");
 		Thread t2 = new Thread(uc::method2, "t2");
+		Thread t3 = new Thread(uc::method3, "t3");
 		t1.start();
-
 		t2.start();
+		t3.start();
 	}
 	
 	

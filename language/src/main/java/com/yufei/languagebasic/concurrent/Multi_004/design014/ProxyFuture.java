@@ -1,12 +1,12 @@
 package com.yufei.languagebasic.concurrent.Multi_004.design014;
 
-public class FutureData implements Data{
+public class ProxyFuture implements Future {
 
-	private RealData realData ;
+	private RealFuture realData ;
 	
 	private boolean isReady = false;
 	
-	public synchronized void setRealData(RealData realData) {
+	public synchronized void setRealData(RealFuture realData) {
 		//如果已经装载完毕了，就直接返回
 		if(isReady){
 			return;
@@ -19,7 +19,7 @@ public class FutureData implements Data{
 	}
 	
 	@Override
-	public synchronized String useData() {
+	public synchronized String get() {
 		System.out.println("现在需要使用真实数据了！");
 		//如果没装载好 程序就一直处于阻塞状态
 		while(!isReady){
@@ -30,7 +30,7 @@ public class FutureData implements Data{
 			}
 		}
 		//装载好直接获取数据即可
-		return this.realData.useData();
+		return this.realData.get();
 	}
 
 

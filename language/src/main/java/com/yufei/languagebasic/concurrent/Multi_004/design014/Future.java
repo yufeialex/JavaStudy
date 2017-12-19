@@ -1,7 +1,7 @@
 package com.yufei.languagebasic.concurrent.Multi_004.design014;
 
-public interface Data {
+public interface Future {
 
-	String useData();
+	String get();
 
 }
