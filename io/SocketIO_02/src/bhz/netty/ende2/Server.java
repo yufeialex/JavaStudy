@@ -37,7 +37,8 @@ public class Server {
 				//设置定长字符串接收
 				sc.pipeline().addLast(new FixedLengthFrameDecoder(5));
 				//设置字符串形式的解码
-				sc.pipeline().addLast(new StringDecoder());
+                // 这里指定字符串，解析时候拿到的内容就直接转换成字符串，否则还得从ByteBuf转换
+                sc.pipeline().addLast(new StringDecoder());
 				sc.pipeline().addLast(new ServerHandler());
 			}
 		});

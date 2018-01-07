@@ -1,5 +1,6 @@
 package bhz.netty.serial;
 
+import bhz.netty.heartBeat.MarshallingCodeCFactory;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -15,7 +16,6 @@ import bhz.utils.GzipUtils;
 
 public class Client {
 
-	
 	public static void main(String[] args) throws Exception{
 		
 		EventLoopGroup group = new NioEventLoopGroup();
@@ -39,13 +39,13 @@ public class Client {
 			req.setName("pro" + i);
 			req.setRequestMessage("数据信息" + i);
 
-			/*String path = System.getProperty("user.dir") + File.separatorChar + "sources" +  File.separatorChar + "001.jpg";
+			String path = System.getProperty("user.dir") + File.separatorChar + "sources" +  File.separatorChar + "001.jpg";
 			File file = new File(path);
 	        FileInputStream in = new FileInputStream(file);  
 	        byte[] data = new byte[in.available()];  
 	        in.read(data);  
 	        in.close(); 
-			req.setAttachment(GzipUtils.gzip(data));*/
+			req.setAttachment(GzipUtils.gzip(data));
 
 			cf.channel().writeAndFlush(req);
 		}
