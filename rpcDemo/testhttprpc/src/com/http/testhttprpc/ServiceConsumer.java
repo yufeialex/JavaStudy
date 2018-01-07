@@ -16,10 +16,10 @@ import org.apache.http.util.EntityUtils;
 
 
 /**
- * 
- * @Description: ·şÎñÏû·ÑÕß 
- * @Author chenkangxian   
- * @Date 2013-6-24 ÏÂÎç4:18:52 
+ *
+ * @Description: æœåŠ¡æ¶ˆè´¹è€…
+ * @Author chenkangxian
+ * @Date 2013-6-24 ä¸‹åˆ4:18:52
  * @Copyright: 2012 chenkangxian, All rights reserved.
  *
  */
@@ -36,29 +36,29 @@ public class ServiceConsumer extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		//²ÎÊı
+		//å‚æ•°
 		String service = "com.http.sayhello";
 		String format = "json";
 		String arg1 = "hello";
-		
-		
+
+
 		String url = "http://localhost:8080//testhttprpc/provider.do?"+"service=" + service + "&format=" + format + "&arg1=" + arg1;
 
-		//×é×°ÇëÇó
+		//ç»„è£…è¯·æ±‚
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(url);	
+		HttpGet httpGet = new HttpGet(url);
 
-		//½ÓÊÕÏìÓ¦
+		//æ¥æ”¶å“åº”
 		HttpResponse response = httpClient.execute(httpGet);
 
 		HttpEntity entity = response.getEntity();
 		byte[] bytes = EntityUtils.toByteArray(entity);
 		String jsonresult = new String(bytes, "utf8");
-		
+
 		JsonResult result = (JsonResult)JsonUtil.jsonToObject(jsonresult, JsonResult.class);
 
 		resp.getWriter().write(result.getResult().toString());
-		
+
 	}
 
 

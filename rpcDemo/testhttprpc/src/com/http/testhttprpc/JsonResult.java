@@ -1,23 +1,23 @@
 /**
- * 
+ *
  */
 package com.http.testhttprpc;
 
 /**
- * @Description: json½á¹û¼¯ 
- * @Author chenkangxian   
- * @Date 2013-6-24 ÏÂÎç8:33:24 
+ * @Description: jsonç»“æœé›†
+ * @Author chenkangxian
+ * @Date 2013-6-24 ä¸‹åˆ8:33:24
  * @Copyright: 2012 chenkangxian, All rights reserved.
  **/
 public class JsonResult {
 
-	//½á¹û×´Ì¬Âë
+	//ç»“æœçŠ¶æ€ç 
 	private int resultCode;
-	//×´Ì¬Âë½âÊÍÏûÏ¢
+	//çŠ¶æ€ç è§£é‡Šæ¶ˆæ¯
 	private String message;
-	//½á¹û
+	//ç»“æœ
 	private Object result;
-	
+
 	public int getResultCode() {
 		return resultCode;
 	}
@@ -36,6 +36,6 @@ public class JsonResult {
 	public void setResult(Object result) {
 		this.result = result;
 	}
-	
-	
+
+
 }

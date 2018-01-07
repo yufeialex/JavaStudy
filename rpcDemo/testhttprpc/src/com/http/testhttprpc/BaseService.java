@@ -1,14 +1,14 @@
 /**
- * 
+ *
  */
 package com.http.testhttprpc;
 
 import java.util.Map;
 
 /**
- * @Description: 基础服务接口 
- * @Author chenkangxian   
- * @Date 2013-6-24 下午8:23:26 
+ * @Description: 鍩虹鏈嶅姟鎺ュ彛
+ * @Author chenkangxian
+ * @Date 2013-6-24 涓嬪崍8:23:26
  * @Copyright: 2012 chenkangxian, All rights reserved.
  **/
 public interface BaseService {

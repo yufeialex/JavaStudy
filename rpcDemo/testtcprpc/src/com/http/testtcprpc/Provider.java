@@ -11,16 +11,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 
- * @Description: ·şÎñÌá¹©Õß 
- * @Author chenkangxian   
- * @Date 2013-6-20 ÏÂÎç8:19:15 
+ *
+ * @Description: æœåŠ¡æä¾›è€…
+ * @Author chenkangxian
+ * @Date 2013-6-20 ä¸‹åˆ8:19:15
  * @Copyright: 2012 chenkangxian, All rights reserved.
  *
  */
 public class Provider {
 
-	//ËùÓĞµÄ·şÎñ
+	//æ‰€æœ‰çš„æœåŠ¡
 	private static Map<String,Object> services = new HashMap<String,Object>();
 
 	static{
@@ -29,25 +29,25 @@ public class Provider {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException{
 
-		ServerSocket server = new ServerSocket(1234);  
-		while(true) {  
-			Socket socket = server.accept();  
+		ServerSocket server = new ServerSocket(1234);
+		while(true) {
+			Socket socket = server.accept();
 
-			//¶ÁÈ¡·şÎñĞÅÏ¢
+			//è¯»å–æœåŠ¡ä¿¡æ¯
 			ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
-			String interfacename = input.readUTF(); //½Ó¿ÚÃû³Æ
-			String methodName = input.readUTF();  //·½·¨Ãû³Æ
-			Class<?>[] parameterTypes = (Class<?>[])input.readObject();  //²ÎÊıÀàĞÍ
-			Object[] arguments = (Object[])input.readObject();  //²ÎÊı¶ÔÏó
+			String interfacename = input.readUTF(); //æ¥å£åç§°
+			String methodName = input.readUTF();  //æ–¹æ³•åç§°
+			Class<?>[] parameterTypes = (Class<?>[])input.readObject();  //å‚æ•°ç±»å‹
+			Object[] arguments = (Object[])input.readObject();  //å‚æ•°å¯¹è±¡
 
-			//Ö´ĞĞµ÷ÓÃ
-			Class serviceinterfaceclass = Class.forName(interfacename);//µÃµ½½Ó¿ÚµÄclass
-			Object service = services.get(interfacename);//È¡µÃ·şÎñÊµÏÖµÄ¶ÔÏó
-			Method method = serviceinterfaceclass.getMethod(methodName, parameterTypes);//»ñµÃÒªµ÷ÓÃµÄ·½·¨  
+			//æ‰§è¡Œè°ƒç”¨
+			Class serviceinterfaceclass = Class.forName(interfacename);//å¾—åˆ°æ¥å£çš„class
+			Object service = services.get(interfacename);//å–å¾—æœåŠ¡å®ç°çš„å¯¹è±¡
+			Method method = serviceinterfaceclass.getMethod(methodName, parameterTypes);//è·å¾—è¦è°ƒç”¨çš„æ–¹æ³•
 			Object result = method.invoke(service, arguments);
 
-			ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream()); 
+			ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
 			output.writeObject(result);
-		}  
+		}
 	}
 }
