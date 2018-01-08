@@ -1,5 +1,6 @@
-package com.yufei.languagebasic.io.SocketIO_02.netty.serial;
+package com.yufei.languagebasic.io.SocketIO_02.netty.serialization;
 
+import com.yufei.languagebasic.io.SocketIO_03.netty.dataCommunication.MarshallingCodecFactory;
 import com.yufei.languagebasic.io.SocketIO_03.utils.GzipUtils;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -11,6 +12,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.io.File;
 import java.io.FileInputStream;
+
+import bhz.utils.GzipUtils;
 
 public class Client {
 
@@ -24,8 +27,8 @@ public class Client {
 		 .handler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			protected void initChannel(SocketChannel sc) throws Exception {
-				sc.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingDecoder());
-				sc.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingEncoder());
+				sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingDecoder());
+				sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingEncoder());
 				sc.pipeline().addLast(new ClientHandler());
 			}
 		});
@@ -36,7 +39,8 @@ public class Client {
 			Req req = new Req();
 			req.setId("" + i);
 			req.setName("pro" + i);
-			req.setRequestMessage("数据信息" + i);	
+			req.setRequestMessage("数据信息" + i);
+
 			String path = System.getProperty("user.dir") + File.separatorChar + "sources" +  File.separatorChar + "001.jpg";
 			File file = new File(path);
 	        FileInputStream in = new FileInputStream(file);  
@@ -44,6 +48,7 @@ public class Client {
 	        in.read(data);  
 	        in.close(); 
 			req.setAttachment(GzipUtils.gzip(data));
+
 			cf.channel().writeAndFlush(req);
 		}
 

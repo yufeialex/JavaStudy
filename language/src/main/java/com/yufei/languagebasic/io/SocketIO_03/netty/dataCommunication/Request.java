@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.io.SocketIO_03.netty.runtime;
+package com.yufei.languagebasic.io.SocketIO_03.netty.dataCommunication;
 
 import java.io.Serializable;
 

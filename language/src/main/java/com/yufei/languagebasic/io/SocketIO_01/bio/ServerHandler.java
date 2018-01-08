@@ -26,9 +26,8 @@ public class ServerHandler implements Runnable{
 				body = in.readLine();
 				if(body == null) break;
 				System.out.println("Server :" + body);
-				out.println("服务器端回送响的应数据.");
+				out.println("服务器端回送响应数据.");
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -55,8 +54,6 @@ public class ServerHandler implements Runnable{
 			}
 			socket = null;
 		}
-		
-		
 	}
 
 }

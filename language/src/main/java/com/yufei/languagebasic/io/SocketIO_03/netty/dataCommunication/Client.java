@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.io.SocketIO_03.netty.runtime;
+package com.yufei.languagebasic.io.SocketIO_03.netty.dataCommunication;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -18,7 +18,8 @@ import java.util.concurrent.TimeUnit;
  * Best Do It
  */
 public class Client {
-	
+
+	// 单例模式
 	private static class SingletonHolder {
 		static final Client instance = new Client();
 	}
@@ -40,8 +41,8 @@ public class Client {
 			 .handler(new ChannelInitializer<SocketChannel>() {
 					@Override
 					protected void initChannel(SocketChannel sc) throws Exception {
-						sc.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingDecoder());
-						sc.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingEncoder());
+						sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingDecoder());
+						sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingEncoder());
 						//超时handler（当服务器端与客户端在指定时间以上没有任何进行通信，则会关闭响应的通道，主要为减小服务端资源占用）
 						sc.pipeline().addLast(new ReadTimeoutHandler(5)); 
 						sc.pipeline().addLast(new ClientHandler());
@@ -87,28 +88,25 @@ public class Client {
 		cf.channel().closeFuture().sync();
 		
 		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					System.out.println("进入子线程...");
-					ChannelFuture cf = c.getChannelFuture();
-					System.out.println(cf.channel().isActive());
-					System.out.println(cf.channel().isOpen());
-					
-					//再次发送数据
-					Request request = new Request();
-					request.setId("" + 4);
-					request.setName("pro" + 4);
-					request.setRequestMessage("数据信息" + 4);
-					cf.channel().writeAndFlush(request);					
-					cf.channel().closeFuture().sync();
-					System.out.println("子线程结束.");
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}).start();
+		new Thread(() -> {
+            try {
+                System.out.println("进入子线程...");
+                ChannelFuture cf1 = c.getChannelFuture();
+                System.out.println(cf1.channel().isActive());
+                System.out.println(cf1.channel().isOpen());
+
+                //再次发送数据
+                Request request = new Request();
+                request.setId("" + 4);
+                request.setName("pro" + 4);
+                request.setRequestMessage("数据信息" + 4);
+                cf1.channel().writeAndFlush(request);
+                cf1.channel().closeFuture().sync();
+                System.out.println("子线程结束.");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
 		
 		System.out.println("断开连接,主线程结束..");
 		

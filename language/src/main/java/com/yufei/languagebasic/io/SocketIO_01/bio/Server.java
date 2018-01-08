@@ -19,7 +19,7 @@ public class Server {
 			Socket socket = server.accept();
 			//新建一个线程执行客户端的任务
 			new Thread(new ServerHandler(socket)).start();
-			
+			new Thread(new ServerHandler(socket)).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

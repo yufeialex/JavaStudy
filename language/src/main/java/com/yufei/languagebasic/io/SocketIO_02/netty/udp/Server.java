@@ -13,7 +13,7 @@ public class Server {
     	EventLoopGroup group = new NioEventLoopGroup();
 		try {
 		    Bootstrap b = new Bootstrap();
-		    b.group(group).channel(NioDatagramChannel.class)
+		    b.group(group).channel(NioDatagramChannel.class) // 类型和tcp不一样
 			    .option(ChannelOption.SO_BROADCAST, true)
 			    .handler(new ServerHandler());
 		    b.bind(port).sync().channel().closeFuture().await();

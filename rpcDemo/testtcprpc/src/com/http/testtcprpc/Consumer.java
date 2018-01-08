@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.http.testtcprpc;
 
@@ -11,40 +11,40 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- * @Description: ·şÎñÏû·ÑÕß 
- * @Author chenkangxian   
- * @Date 2013-6-20 ÏÂÎç8:18:56 
+ * @Description: æœåŠ¡æ¶ˆè´¹è€…
+ * @Author chenkangxian
+ * @Date 2013-6-20 ä¸‹åˆ8:18:56
  * @Copyright: 2012 chenkangxian, All rights reserved.
  **/
 public class Consumer {
 
-	
+
 	public static void main(String[] args) throws UnknownHostException, IOException, SecurityException, NoSuchMethodException, ClassNotFoundException{
 
-		//½Ó¿ÚÃû³Æ
+		//æ¥å£åç§°
 		String interfacename= SayHelloService.class.getName();
-		
-		//ĞèÒªÔ¶³ÌÖ´ĞĞµÄ·½·¨
+
+		//éœ€è¦è¿œç¨‹æ‰§è¡Œçš„æ–¹æ³•
 		Method method = SayHelloService.class.getMethod("sayHello", java.lang.String.class);
 
-		//ĞèÒª´«µİµ½Ô¶¶ËµÄ²ÎÊı
-		Object[] arguments = {"hello"};
+		//éœ€è¦ä¼ é€’åˆ°è¿œç«¯çš„å‚æ•°
+		Object[] arguments = {"hello1"};
 
 		Socket socket = new Socket("127.0.0.1", 1234);
 
-		//½«·½·¨Ãû³ÆºÍ²ÎÊı´«µİµ½Ô¶¶Ë
+		//å°†æ–¹æ³•åç§°å’Œå‚æ•°ä¼ é€’åˆ°è¿œç«¯
 		ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-		output.writeUTF(interfacename); //½Ó¿ÚÃû³Æ
-		output.writeUTF(method.getName());  //·½·¨Ãû³Æ
-		output.writeObject(method.getParameterTypes());  
-		output.writeObject(arguments);  
+		output.writeUTF(interfacename); //æ¥å£åç§°
+		output.writeUTF(method.getName());  //æ–¹æ³•åç§°
+		output.writeObject(method.getParameterTypes());
+		output.writeObject(arguments);
 
-		//´ÓÔ¶¶Ë¶ÁÈ¡·½·¨Ö´ĞĞ½á¹û
-		ObjectInputStream input = new ObjectInputStream(socket.getInputStream());  
+		//ä»è¿œç«¯è¯»å–æ–¹æ³•æ‰§è¡Œç»“æœ
+		ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
 		Object result = input.readObject();
-		
-		//Ê¹ÓÃ´úÀí¶ÔÏóÀ´´¦Àí£¬Ö±½Ó·µ»ØstringÀàĞÍ
-		
+
+		//ä½¿ç”¨ä»£ç†å¯¹è±¡æ¥å¤„ç†ï¼Œç›´æ¥è¿”å›stringç±»å‹
+
 		System.out.println(result);
 	}
 }

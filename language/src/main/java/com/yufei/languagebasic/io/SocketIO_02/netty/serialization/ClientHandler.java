@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.io.SocketIO_02.netty.serial;
+package com.yufei.languagebasic.io.SocketIO_02.netty.serialization;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;

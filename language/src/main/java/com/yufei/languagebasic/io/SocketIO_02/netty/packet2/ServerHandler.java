@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.io.SocketIO_02.netty.ende1;
+package com.yufei.languagebasic.io.SocketIO_02.netty.packet2;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerAdapter;
@@ -15,9 +15,8 @@ public class ServerHandler extends ChannelHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		String request = (String)msg;
-		System.out.println("Server :" + request);
-		String response = "服务器响应：" + msg + "$_";
-		// 这里参数不能直接用string
+		System.out.println("Server :" + msg);
+		String response =  request ;
 		ctx.writeAndFlush(Unpooled.copiedBuffer(response.getBytes()));
 	}
 
@@ -28,7 +27,7 @@ public class ServerHandler extends ChannelHandlerAdapter {
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable t) throws Exception {
-		ctx.close();
+
 	}
 
 

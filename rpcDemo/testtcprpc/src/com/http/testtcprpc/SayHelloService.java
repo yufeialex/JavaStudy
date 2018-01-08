@@ -1,19 +1,16 @@
-/**
- * 
- */
 package com.http.testtcprpc;
 
 /**
- * @Description: say helloµÄ½Ó¿Ú
- * @Author chenkangxian   
- * @Date 2013-6-20 ÏÂÎç6:51:09 
+ * @Description: say helloçš„æ¥å£
+ * @Author chenkangxian
+ * @Date 2013-6-20 ä¸‹åˆ6:51:09
  * @Copyright: 2012 chenkangxian, All rights reserved.
  **/
 public interface SayHelloService {
 
 	/**
-	 * ÎÊºÃµÄ½Ó¿Ú
-	 * @param helloArg ²ÎÊı
+	 * é—®å¥½çš„æ¥å£
+	 * @param helloArg å‚æ•°
 	 * @return
 	 */
 	public String sayHello(String helloArg);
