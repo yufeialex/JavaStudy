@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.Multi_006.concurrent019;
+package com.yufei.languagebasic.concurrent.Multi_006.cyclicBarrier1;
 import java.io.IOException;  
 import java.util.Random;  
 import java.util.concurrent.BrokenBarrierException;  
@@ -31,7 +31,7 @@ public class UseCyclicBarrier {
 	} 
 	
     public static void main(String[] args) throws IOException, InterruptedException {  
-        CyclicBarrier barrier = new CyclicBarrier(3);  // 3 
+        CyclicBarrier barrier = new CyclicBarrier(3);
         ExecutorService executor = Executors.newFixedThreadPool(3);  
         
         executor.submit(new Thread(new Runner(barrier, "zhangsan")));  
