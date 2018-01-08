@@ -56,7 +56,7 @@ public class StudyWeakHashMap {
         }
     }
 
-    void func5() {
+    void func5() throws InterruptedException {
         Map<Object, Object> map = new WeakHashMap<>();
         map.put(null, new byte[5 * 1024 * 928]);
         int i = 1;

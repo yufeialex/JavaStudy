@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.Multi_005.concurrent019;
+package com.yufei.languagebasic.concurrent.Multi_006.concurrent019;
 import java.io.IOException;  
 import java.util.Random;  
 import java.util.concurrent.BrokenBarrierException;  

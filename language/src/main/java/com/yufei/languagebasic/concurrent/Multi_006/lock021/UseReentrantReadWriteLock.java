@@ -53,13 +53,6 @@ public class UseReentrantReadWriteLock {
 		
 		t3.start();
 		t4.start();
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
 }
