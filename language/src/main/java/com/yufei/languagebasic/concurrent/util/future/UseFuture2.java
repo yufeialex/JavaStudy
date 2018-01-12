@@ -1,10 +1,10 @@
-package com.yufei.languagebasic.concurrent.util.concurrent019;
+package com.yufei.languagebasic.concurrent.util.future;
 
 import java.util.concurrent.*;
 
 /**
  * 和UseFuture文件的区别是用了线程池
- *
+ * <p>
  * 模拟假设，输入一本书，分词处理后，与数据库的两个图谱进行校对，但是图谱从数据库取回还要进行处理。
  * 此时就可以用future进行处理
  */

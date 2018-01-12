@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.util.cylicBarrier2;
+package com.yufei.languagebasic.concurrent.util.cyclicBarrier2;
 
 import java.util.Random;
 
@@ -13,10 +13,10 @@ public class MatrixMock {
         int counter = 0;
         data = new int[size][length];
         Random random = new Random();
-        for(int i = 0; i < size; i++) {
-            for(int j = 0; j < length; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < length; j++) {
                 data[i][j] = random.nextInt(10);
-                if(data[i][j] == number) {
+                if (data[i][j] == number) {
                     counter++;
                 }
             }
@@ -26,7 +26,7 @@ public class MatrixMock {
     }
 
     public int[] getRow(int row) {
-        if(row >= 0 && row < data.length) {
+        if (row >= 0 && row < data.length) {
             return data[row];
         } else {
             return null;

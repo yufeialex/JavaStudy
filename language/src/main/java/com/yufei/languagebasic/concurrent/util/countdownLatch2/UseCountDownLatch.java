@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.util.concurrent019;
+package com.yufei.languagebasic.concurrent.util.countdownLatch2;
 
 import java.util.concurrent.CountDownLatch;
 

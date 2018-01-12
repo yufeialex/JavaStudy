@@ -1,8 +1,9 @@
-package com.yufei.languagebasic.concurrent.util.cylicBarrier2;
+package com.yufei.languagebasic.concurrent.util.cyclicBarrier2;
 
 /**
  * Created by XinYufei on 2018/1/8.
  */
+
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
@@ -29,11 +30,11 @@ public class Searcher implements Runnable {
         int counter;
         System.out.printf("%s: Processing lines from %d to %d.\n",
                 Thread.currentThread().getName(), firstRow, lastRow);
-        for(int i = firstRow; i < lastRow; i++) {
+        for (int i = firstRow; i < lastRow; i++) {
             int[] row = mock.getRow(i);
             counter = 0;
-            for(int j = 0; j < row.length; j++) {
-                if(row[j] == number) {
+            for (int j = 0; j < row.length; j++) {
+                if (row[j] == number) {
                     counter++;
                 }
             }
@@ -44,9 +45,9 @@ public class Searcher implements Runnable {
 
         try {
             barrier.await();
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch(BrokenBarrierException e) {
+        } catch (BrokenBarrierException e) {
             e.printStackTrace();
         }
     }

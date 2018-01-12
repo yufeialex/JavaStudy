@@ -1,19 +1,19 @@
-package com.yufei.languagebasic.concurrent.util.concurrent019;
+package com.yufei.languagebasic.concurrent.util.semaphore;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;  
-  
-public class UseSemaphore {  
-  
-    public static void main(String[] args) {  
+import java.util.concurrent.Semaphore;
+
+public class UseSemaphore {
+
+    public static void main(String[] args) {
         // 线程池  
-        ExecutorService exec = Executors.newCachedThreadPool();  
+        ExecutorService exec = Executors.newCachedThreadPool();
         // 只能5个线程同时访问  
-        final Semaphore semp = new Semaphore(5);  
+        final Semaphore semp = new Semaphore(5);
         // 模拟20个客户端访问  
-        for (int index = 0; index < 20; index++) {  
-            final int NO = index;  
+        for (int index = 0; index < 20; index++) {
+            final int NO = index;
             exec.execute(() -> {
                 try {
                     // 获取许可
@@ -28,15 +28,15 @@ public class UseSemaphore {
             });
         }
         try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-        
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //System.out.println(semp.getQueueLength());
 
         // 退出线程池  
-        exec.shutdown();  
-    }  
-  
+        exec.shutdown();
+    }
+
 }  

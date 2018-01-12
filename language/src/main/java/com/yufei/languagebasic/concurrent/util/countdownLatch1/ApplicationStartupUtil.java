@@ -9,27 +9,23 @@ import java.util.concurrent.Executors;
 /**
  * Created by XinYufei on 2018/1/8.
  */
-public class ApplicationStartupUtil
-{
+public class ApplicationStartupUtil {
     //List of service checkers
     private static List<BaseHealthChecker> _services;
 
     //This latch will be used to wait on
     private static CountDownLatch _latch;
 
-    private ApplicationStartupUtil()
-    {
+    private ApplicationStartupUtil() {
     }
 
     private final static ApplicationStartupUtil INSTANCE = new ApplicationStartupUtil();
 
-    public static ApplicationStartupUtil getInstance()
-    {
+    public static ApplicationStartupUtil getInstance() {
         return INSTANCE;
     }
 
-    public static boolean checkExternalServices() throws Exception
-    {
+    public static boolean checkExternalServices() throws Exception {
         //Initialize the latch with number of service checkers
         _latch = new CountDownLatch(3);
 
@@ -42,8 +38,7 @@ public class ApplicationStartupUtil
         //Start service checkers using executor framework
         ExecutorService executor = Executors.newFixedThreadPool(_services.size());
 
-        for(final BaseHealthChecker v : _services)
-        {
+        for (final BaseHealthChecker v : _services) {
             executor.execute(v);
         }
 
@@ -52,10 +47,8 @@ public class ApplicationStartupUtil
 
 
         //Services are file and now proceed startup
-        for(final BaseHealthChecker v : _services)
-        {
-            if( ! v.isServiceUp())
-            {
+        for (final BaseHealthChecker v : _services) {
+            if (!v.isServiceUp()) {
                 return false;
             }
         }
@@ -63,15 +56,14 @@ public class ApplicationStartupUtil
     }
 
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         boolean result = false;
         try {
             result = ApplicationStartupUtil.checkExternalServices();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("External services validation completed !! Result was :: "+ result);
+        System.out.println("External services validation completed !! Result was :: " + result);
     }
 
 }

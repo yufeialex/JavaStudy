@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.util.cylicBarrier2;
+package com.yufei.languagebasic.concurrent.util.cyclicBarrier2;
 
 /**
  * Created by XinYufei on 2018/1/8.

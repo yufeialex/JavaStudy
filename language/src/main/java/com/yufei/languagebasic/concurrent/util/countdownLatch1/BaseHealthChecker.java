@@ -12,8 +12,7 @@ public abstract class BaseHealthChecker implements Runnable {
     private boolean _serviceUp;
 
     //Get latch object in constructor so that after completing the task, thread can countDown() the latch
-    public BaseHealthChecker(String serviceName, CountDownLatch latch)
-    {
+    public BaseHealthChecker(String serviceName, CountDownLatch latch) {
         super();
         this._latch = latch;
         this._serviceName = serviceName;
@@ -29,7 +28,7 @@ public abstract class BaseHealthChecker implements Runnable {
             t.printStackTrace(System.err);
             _serviceUp = false;
         } finally {
-            if(_latch != null) {
+            if (_latch != null) {
                 _latch.countDown();
             }
         }
@@ -42,6 +41,7 @@ public abstract class BaseHealthChecker implements Runnable {
     public boolean isServiceUp() {
         return _serviceUp;
     }
+
     //This method needs to be implemented by all specific service checker
     public abstract void verifyService();
 }
