@@ -1,55 +1,55 @@
 package com.yufei.languagebasic.designpattern.singleton;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 /**
  * Created by XinYufei on 2017/2/24.
  */
-public class Singleton {
+public class Singleton implements Runnable {
 
     public static void main(String[] args) {
-        /*S1 instance = S1.getInstance();
-        instance.setName("yufei");
-        S1 instance1 = S1.getInstance();
-        instance1.setName("notYufei");
-        System.out.println(instance1.getName());
 
-        Thread t1 = new Thread(() -> {
-            S3 instance2 = S3.getInstance();
-            instance2.setName(Thread.currentThread().getName());
-            System.out.println(instance2);
-            System.out.println(instance2.getName());
-        }, "t1");
+        // 单线程情况，测试单例功能是否实现
+//        DoubleCheckedLockingSingleton instance = DoubleCheckedLockingSingleton.getInstance();
+//        instance.setName("yufei");
+//        DoubleCheckedLockingSingleton instance1 = DoubleCheckedLockingSingleton.getInstance();
+//        System.out.println(instance1.getName());
 
-        Thread t2 = new Thread(() -> {
-            S3 instance2 = S3.getInstance();
-            instance2.setName(Thread.currentThread().getName());
-//            用S3 double check的单例模式的时候，注释掉上面，因为两个线程操作的是同一个对象，所以打印结果完全一样。
-//            如果用S2就不行，非线程安全。如果打开上面这句话，因为name并没有做同步，所以即使是同一个对象，也会不一致，
+        // 多线程情况，测试线程安全问题
+        ExecutorService es = Executors.newFixedThreadPool(2);
+        Singleton singleton = new Singleton();
+        Future<?> submit = es.submit(singleton);
+        Future<?> submit2 = es.submit(singleton);
+        es.shutdown();
+    }
 
-            System.out.println(instance2);
-            System.out.println(instance2.getName());
-        }, "t2");*/
-
-//        Thread t1 = new Thread(() -> {
-//                S2 instance2 = S2.getInstance();
-//                System.out.println(instance2);
-//        }, "t1");
-//        Thread t2 = new Thread(() -> {
-//            S2 instance2 = S2.getInstance();
-//            System.out.println(instance2);
-//        }, "t2");
-
- /*       t1.start();
-        t2.start();*/
+    @Override
+    public void run() {
+        LazySingleton instance = LazySingleton.getInstance();
+        instance.setName(Thread.currentThread().getName());
+        System.out.println(instance);
+        System.out.println(instance.getName());
     }
 }
-
 
 
 // 懒汉
 class EagerSingleton {
     // jvm保证在任何线程访问uniqueInstance静态变量之前一定先创建了此实例
-    private static final EagerSingleton uniqueInstance = new EagerSingleton(); // 线程安全，一开始就载入，比较浪费资源
+    // 线程安全，一开始就载入，比较浪费资源
+    private static final EagerSingleton uniqueInstance = new EagerSingleton();
     private String name;
+
+    //构造函数私有化
+    private EagerSingleton() {
+    }
+
+    //提供一个全局的静态方法
+    public static EagerSingleton getInstance() {
+        return uniqueInstance;
+    }
 
     public synchronized String getName() {
         return name;
@@ -59,13 +59,6 @@ class EagerSingleton {
         this.name = name;
     }
 
-    //构造函数私有化
-    private EagerSingleton(){}
-
-    //提供一个全局的静态方法
-    public static EagerSingleton getInstance() {
-        return uniqueInstance;
-    }
 }
 
 // 饿汉
@@ -73,7 +66,17 @@ class LazySingleton {
     private static LazySingleton uniqueInstance;
     private String name;
 
+    //构造函数私有化
     private LazySingleton() {
+    }
+
+    //提供一个全局的静态方法
+    //多线程不能保证单例
+    public static LazySingleton getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new LazySingleton();
+        }
+        return uniqueInstance;
     }
 
     public String getName() {
@@ -84,14 +87,6 @@ class LazySingleton {
         this.name = name;
     }
 
-    //提供一个全局的静态方法
-    //懒汉式，多线程不能保证单例
-    public static LazySingleton getInstance() {
-        if(uniqueInstance == null) {
-            uniqueInstance = new LazySingleton();
-        }
-        return uniqueInstance;
-    }
 }
 
 // double check
@@ -102,16 +97,16 @@ class DoubleCheckedLockingSingleton {
     private String name;
 
     private DoubleCheckedLockingSingleton() {
-
     }
 
     // 提供一个全局的静态方法
     // 为了效率，只在创建时候加锁，以后不需要锁定
     public static DoubleCheckedLockingSingleton getInstance() {
-        if(uniqueInstance == null) {
-            synchronized (DoubleCheckedLockingSingleton.class) { // 可能前两个线程都进来了，所以要再判断一遍；这里只会执行一遍；
-                                      // 锁的粒度比较小；以后亦不会再用到这个锁了
-                if(uniqueInstance == null) {
+        if (uniqueInstance == null) {
+            // 锁的粒度比较小；以后亦不会再用到这个锁了
+            synchronized (DoubleCheckedLockingSingleton.class) {
+                // 可能前两个线程都进来了，所以要再判断一遍；这里只会执行一遍
+                if (uniqueInstance == null) {
                     uniqueInstance = new DoubleCheckedLockingSingleton();
                 }
             }
@@ -129,18 +124,17 @@ class DoubleCheckedLockingSingleton {
 }
 
 // inner class
-class LazyInitHolderSingleton  {
-    private static class SingletonHolder  {
-        private static final LazyInitHolderSingleton  INSTANCE  = new LazyInitHolderSingleton ();
+class LazyInitHolderSingleton {
+    private static class SingletonHolder {
+        private static final LazyInitHolderSingleton INSTANCE = new LazyInitHolderSingleton();
     }
 
     public static LazyInitHolderSingleton getInstance() {
-        return SingletonHolder.INSTANCE ;
+        return SingletonHolder.INSTANCE;
     }
 }
 
-enum SingletonClass
-{
+enum SingletonClass {
     INSTANCE;
 }
 
