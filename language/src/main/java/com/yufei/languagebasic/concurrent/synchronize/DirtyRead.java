@@ -3,12 +3,11 @@ package com.yufei.languagebasic.concurrent.synchronize;
 /**
  * 业务整体需要使用完整的synchronized，保持业务的原子性。
  * 业务要考虑整体性，对于变量的set和get方法肯定要一起同步
- *
+ * <p>
  * 一个线程修改到一半，另一个线程读取到了修改一半的结果。
  * 类似数据库事务，A事务修改到一半的时候，B事务不应该看到结果
- *
+ * <p>
  * 系统中老婆在修改我的账号，但是改到一半我就去读取了。导致错误
- *
  */
 public class DirtyRead {
 
@@ -29,7 +28,7 @@ public class DirtyRead {
 
 	public static void main(String[] args) throws Exception {
 		final DirtyRead dr = new DirtyRead(); // 这个就是共享资源
-        Runnable ljw = () -> {
+		Runnable ljw = () -> {
             try {
                 dr.setValue("ljw", "456");
             } catch (InterruptedException e) {

@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.executors;
+package com.yufei.languagebasic.concurrent.executors.completableFuture;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +139,7 @@ public class CompletionServiceTest {
 
         System.out.println(completionTask + " task done !");
 
-        //ExecutorService使用完一定要关闭 (回收资源, 否则系统资源耗尽! .... 呵呵...)
+        //ExecutorService使用完一定要关闭 (回收资源, 否则系统资源耗尽!)
         service.shutdown();
     }
 }

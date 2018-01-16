@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent;
+package com.yufei.languagebasic.concurrent.other;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.other.conn008;
+package com.yufei.languagebasic.concurrent.other.waitNotify;
 
 import java.util.ArrayList;
 import java.util.List;

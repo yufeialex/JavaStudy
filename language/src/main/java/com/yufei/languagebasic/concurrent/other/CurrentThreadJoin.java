@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent;
+package com.yufei.languagebasic.concurrent.other;
 
 /**
  * Created by XinYufei on 2018/1/12.

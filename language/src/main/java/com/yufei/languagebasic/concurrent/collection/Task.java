@@ -1,9 +1,9 @@
-package com.yufei.languagebasic.concurrent.design.test;
+package com.yufei.languagebasic.concurrent.collection;
 
-public class Task {
+public class Task implements Comparable<Task> {
+
     private int id;
     private String name;
-    private int price;
 
     public int getId() {
         return id;
@@ -21,13 +21,13 @@ public class Task {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+    @Override
+    public int compareTo(Task task) {
+        return this.id > task.id ? 1 : (this.id < task.id ? -1 : 0);
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public String toString() {
+        return this.id + "," + this.name;
     }
-
 
 }

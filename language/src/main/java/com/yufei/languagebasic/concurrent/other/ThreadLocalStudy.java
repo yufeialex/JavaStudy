@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.other.conn010;
+package com.yufei.languagebasic.concurrent.other;
 
 /**
  * 类比dirtyRead文件。那里面的账号信息是共享的。一个人修改，别人都受到影响。

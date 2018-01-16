@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.util.completableFuture;
+package com.yufei.languagebasic.concurrent.executors.completableFuture;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -7,9 +7,14 @@ import java.util.concurrent.CompletableFuture;
  */
 public class CFutureTest {
     public static void main(String[] args) throws Exception {
-        test1();
+        test7();
     }
 
+    /**
+     * 手动启动一个线程，在run方法最后加一个complete方法，就可以在主线程中等待了。
+     *
+     * @throws Exception
+     */
     public static void test1() throws Exception {
         CompletableFuture<String> completableFuture = new CompletableFuture();
         new Thread(() -> {
@@ -28,6 +33,10 @@ public class CFutureTest {
         System.out.println("计算结果:" + result);
     }
 
+    /**
+     * 手动启动一个线程，在run方法最后加一个completeExceptionally方法，就可以在主线程中等待了。
+     * @throws Exception
+     */
     public static void test2() throws Exception {
         CompletableFuture<String> completableFuture = new CompletableFuture();
         new Thread(() -> {
@@ -70,14 +79,14 @@ public class CFutureTest {
 
         CompletableFuture<String> completableFuture1 = CompletableFuture.supplyAsync(() -> {
             //模拟执行耗时任务
-            System.out.println("task1 doing...");
+            System.out.println("task3 doing...");
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             //返回结果
-            return "result1";
+            return "result3";
         });
 
         CompletableFuture<String> completableFuture2 = CompletableFuture.supplyAsync(() -> {
@@ -139,7 +148,7 @@ public class CFutureTest {
 
         CompletableFuture<Integer> completableFuture1 = CompletableFuture.supplyAsync(() -> {
             //模拟执行耗时任务
-            System.out.println("task1 doing...");
+            System.out.println("task4 doing...");
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
