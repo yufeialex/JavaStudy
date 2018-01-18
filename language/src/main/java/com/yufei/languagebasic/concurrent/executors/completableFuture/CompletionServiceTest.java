@@ -135,6 +135,7 @@ public class CompletionServiceTest {
             Future<String> resultHolder = completionService.take();
             System.out.println("result: " + resultHolder.get());
             completionTask++;
+            System.out.println("完成的百分比：" + (completionTask / (float) 50) * 100 + "%");
         }
 
         System.out.println(completionTask + " task done !");

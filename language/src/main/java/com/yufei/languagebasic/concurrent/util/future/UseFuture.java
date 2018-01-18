@@ -19,8 +19,9 @@ public class UseFuture implements Callable<String> {
      */
     @Override
     public String call() throws Exception {
-        Thread.sleep(3000);
+        Thread.sleep(4000);
         String result = this.knowledgeGraphName + " 构造处理完成";
+        System.out.println("执行线程结束了，不care主线程");
         return result;
     }
 
@@ -36,13 +37,14 @@ public class UseFuture implements Callable<String> {
         // 这里可以做额外的数据操作，也就是主程序执行其他业务逻辑
         // 主线程校验用户信息，对待处理的图书进行解析和分词
         System.out.println("现在开始并行处理输入的图书...");
-        Thread.sleep(5000);
+//        Thread.sleep(5000);
         // 其实也可以不用之前的时间差的想法来理解；新的理解：其实就是多线程，但是特别之处是主线程会在最后等待其他线程；如果其他线程
         // 在并行的时候已经结束任务了，主线程结束自己任务时候，直接就往下走，否则就等一下。
-        System.out.println("主线程的图书处理完了，合并其他线程的图谱处理...");
+//        System.out.println("主线程的图书处理完了，合并其他线程的图谱处理...");
         // 调用获取数据方法,如果call()方法没有执行完成,则依然会进行等待
-        System.out.println("图谱1：" + future.get()); // get就是拿实际的数据，如果没处理完，就会阻塞在这里；
-        System.out.println("图谱2：" + future2.get()); // 两个是并行的，总共用5s，而且主线程处理的1s和这5s也是并行的，打了个时间差
-        System.out.println("开始从2个图谱中查找图书的子图谱");
+//        System.out.println("图谱1：" + future.get()); // get就是拿实际的数据，如果没处理完，就会阻塞在这里；
+//        System.out.println("图谱2：" + future2.get()); // 两个是并行的，总共用5s，而且主线程处理的1s和这5s也是并行的，打了个时间差
+//        System.out.println("开始从2个图谱中查找图书的子图谱");
+        System.out.println("主线程结束啦！");
     }
 }
