@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.synchronize.sync006;
+package com.yufei.languagebasic.concurrent.synchronize;
 
 /**
  * synchronized代码块对字符串的锁，注意String常量池的缓存功能

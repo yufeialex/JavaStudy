@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.synchronize.sync005;
+package com.yufei.languagebasic.concurrent.synchronize;
 
 /**
  * synchronized异常

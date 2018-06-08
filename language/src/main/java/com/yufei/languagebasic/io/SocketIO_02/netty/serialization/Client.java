@@ -13,7 +13,6 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.io.File;
 import java.io.FileInputStream;
 
-import bhz.utils.GzipUtils;
 
 public class Client {
 
