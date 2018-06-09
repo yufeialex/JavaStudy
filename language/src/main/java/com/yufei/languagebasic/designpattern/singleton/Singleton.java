@@ -35,7 +35,7 @@ public class Singleton implements Runnable {
 }
 
 
-// 懒汉
+// 饿汉
 class EagerSingleton {
     // jvm保证在任何线程访问uniqueInstance静态变量之前一定先创建了此实例
     // 线程安全，一开始就载入，比较浪费资源
@@ -61,7 +61,7 @@ class EagerSingleton {
 
 }
 
-// 饿汉
+// 懒汉
 class LazySingleton {
     private static LazySingleton uniqueInstance;
     private String name;
@@ -125,6 +125,7 @@ class DoubleCheckedLockingSingleton {
 
 // inner class
 class LazyInitHolderSingleton {
+    private LazyInitHolderSingleton() {}
     private static class SingletonHolder {
         private static final LazyInitHolderSingleton INSTANCE = new LazyInitHolderSingleton();
     }

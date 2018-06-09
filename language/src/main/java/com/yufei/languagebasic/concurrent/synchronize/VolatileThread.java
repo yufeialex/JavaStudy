@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.synchronize.sync007;
+package com.yufei.languagebasic.concurrent.synchronize;
 
 public class VolatileThread extends Thread {
 

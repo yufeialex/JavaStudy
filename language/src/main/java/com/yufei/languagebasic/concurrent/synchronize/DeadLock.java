@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.synchronize.sync006;
+package com.yufei.languagebasic.concurrent.synchronize;
 
 /**
  * 死锁问题，在设计程序时就应该避免双方相互持有对方的锁的情况
