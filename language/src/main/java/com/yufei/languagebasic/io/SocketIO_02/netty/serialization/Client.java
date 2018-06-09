@@ -14,48 +14,42 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-import java.io.File;
-import java.io.FileInputStream;
-
-
 public class Client {
 
-	
-	public static void main(String[] args) throws Exception{
-		
-		EventLoopGroup group = new NioEventLoopGroup();
-		Bootstrap b = new Bootstrap();
-		b.group(group)
-		 .channel(NioSocketChannel.class)
-		 .handler(new ChannelInitializer<SocketChannel>() {
-			@Override
-			protected void initChannel(SocketChannel sc) throws Exception {
-				sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingDecoder());
-				sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingEncoder());
-				sc.pipeline().addLast(new ClientHandler());
-			}
-		});
-		
-		ChannelFuture cf = b.connect("127.0.0.1", 8765).sync();
-		
-		for(int i = 0; i < 5; i++ ){
-			Req req = new Req();
-			req.setId("" + i);
-			req.setName("pro" + i);
-			req.setRequestMessage("数据信息" + i);
+    public static void main(String[] args) throws Exception {
 
-			String path = System.getProperty("user.dir") + File.separatorChar + "sources" +  File.separatorChar + "001.jpg";
-			File file = new File(path);
-	        FileInputStream in = new FileInputStream(file);  
-	        byte[] data = new byte[in.available()];  
-	        in.read(data);  
-	        in.close(); 
-			req.setAttachment(GzipUtils.gzip(data));
+        EventLoopGroup group = new NioEventLoopGroup();
+        Bootstrap b = new Bootstrap();
+        b.group(group).channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
+            @Override
+            protected void initChannel(SocketChannel sc) throws Exception {
+                sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingDecoder());
+                sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingEncoder());
+                sc.pipeline().addLast(new ClientHandler());
+            }
+        });
 
-			cf.channel().writeAndFlush(req);
-		}
+        ChannelFuture cf = b.connect("127.0.0.1", 8765).sync();
 
-		cf.channel().closeFuture().sync();
-		group.shutdownGracefully();
-	}
+        for (int i = 0; i < 5; i++) {
+            Req req = new Req();
+            req.setId("" + i);
+            req.setName("pro" + i);
+            req.setRequestMessage("数据信息" + i);
+
+            String path = System.getProperty("user.dir") + File.separatorChar + "sources" + File.separatorChar
+                          + "001.jpg";
+            File file = new File(path);
+            FileInputStream in = new FileInputStream(file);
+            byte[] data = new byte[in.available()];
+            in.read(data);
+            in.close();
+            req.setAttachment(GzipUtils.gzip(data));
+
+            cf.channel().writeAndFlush(req);
+        }
+
+        cf.channel().closeFuture().sync();
+        group.shutdownGracefully();
+    }
 }
