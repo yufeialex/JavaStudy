@@ -5,32 +5,35 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 
 /**
+ * 在GC之前，弱引用对象并未被垃圾回收器发现，因此通过 weakRef.get()可以获取对应的对象引用。
+ * 但是只要进行垃圾回收，弱引用一旦被发现，便会立即被回收，并加入注册引用队列中。此时再试图通过weakRef.get()获取对象的引用就会失败。 
+ * 
  * Created by XinYufei on 2018/1/3.
  */
 public class WeakRefTest {
-    private static ReferenceQueue<MyObject> weakQueue = new ReferenceQueue<>();
+    private static ReferenceQueue<RefTest> weakQueue = new ReferenceQueue<>();
 
-    public static class MyObject {
+    public static class RefTest {
 
         @Override
         protected void finalize() throws Throwable {
             super.finalize();
-            System.out.println("MyObject's finalize called");
+            System.out.println("RefTest's finalize called");
         }
 
         @Override
         public String toString() {
-            return "I am MyObject";
+            return "I am RefTest";
         }
     }
 
     public static class CheckRefQueue implements Runnable {
-        Reference<MyObject> obj = null;
+        Reference<RefTest> obj = null;
 
         @Override
         public void run() {
             try {
-                obj = (Reference<MyObject>) weakQueue.remove();
+                obj = (Reference<RefTest>) weakQueue.remove();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -41,8 +44,9 @@ public class WeakRefTest {
     }
 
     public static void main(String[] args) {
-        MyObject object = new MyObject();
-        Reference<MyObject> weakRef = new WeakReference<>(object, weakQueue);
+        RefTest object = new RefTest();
+        Reference<RefTest> weakRef = new WeakReference<>(object, weakQueue);
+
         System.out.println("创建的弱引用为：" + weakRef);
         new Thread(new CheckRefQueue()).start();
 
