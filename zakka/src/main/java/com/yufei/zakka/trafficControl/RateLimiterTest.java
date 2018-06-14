@@ -13,7 +13,7 @@ import com.google.common.util.concurrent.RateLimiter;
 /**
  * <p></p>
  *
- * @author xinyufei@meituan.com
+ * @author RefTest
  * @version $Id: AA.java, v 0.1 2018-06-07 上午11:12 @xinyufei $$
  */
 public class RateLimiterTest {

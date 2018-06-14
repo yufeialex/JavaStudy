@@ -7,7 +7,7 @@ package com.yufei.languagebasic.concurrent.collection;
 /**
  * <p></p>
  *
- * @author xinyufei@meituan.com
+ * @author RefTest
  * @version $Id: Task.java, v 0.1 2018-06-09 下午3:22 @xinyufei $$
  */
 
