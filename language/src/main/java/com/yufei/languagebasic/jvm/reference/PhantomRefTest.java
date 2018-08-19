@@ -6,6 +6,8 @@ import java.lang.ref.ReferenceQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 再经过一次GC之后，系统找到了垃圾对象，并调用finalize()方法回收内存，但没有立即加入回收队列。
+ * 第二次GC时，该对象真正被GC清除，此时，加入虚引用队列。
  * Created by XinYufei on 2018/1/3.
  */
 public class PhantomRefTest {

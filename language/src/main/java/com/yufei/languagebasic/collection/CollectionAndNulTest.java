@@ -1,11 +1,12 @@
-package com.yufei.languagebasic;
+package com.yufei.languagebasic.collection;
 
 import java.util.ArrayList;
 
 /**
+ * 测试容器类能否接受null值
  * Created by XinYufei on 2018/1/15.
  */
-public class TestMain {
+public class CollectionAndNulTest {
     public static void main(String[] args) {
         ArrayList<Integer> integers = new ArrayList<>();
         integers.add(null);

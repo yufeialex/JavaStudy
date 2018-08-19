@@ -34,6 +34,7 @@ public class PhantomRefTest2 {
         @Override
         public void run() {
             try {
+                // 在这种情况下，可以销毁和本对象相关的一些资源
                 obj = (Reference<MyObject>) phanQueue.remove();
                 Object value = map.get(obj);
                 System.out.println("clean resource:" + value);
@@ -50,8 +51,10 @@ public class PhantomRefTest2 {
     public static void main(String[] args) throws InterruptedException {
         MyObject object = new MyObject();
         Reference<MyObject> phanRef = new PhantomReference<>(object, phanQueue);
+
         System.out.println("创建的虚引用为：" + phanRef);
         new Thread(new CheckRefQueue()).start();
+
         map.put(phanRef, "Some Resources");
 
         object = null;

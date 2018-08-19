@@ -1,17 +1,26 @@
 package com.yufei.languagebasic.collection;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * WeakHashMap实现了Map接口，是HashMap的一种实现，它比HashMap多了一个引用队列：
+ *
+ * WeakHashMap中方法的实现方式基本和HashMap的一样，注意“基本”两个字，除了没有实现Cloneable和Serializable这两个标记接口，
+ * 最大的区别在于在于expungeStaleEntries()这个方法，这个是整个WeakHashMap的精髓
+ * 
  * Created by XinYufei on 2018/1/3.
  */
 public class StudyWeakHashMap {
     public static void main(String[] args) {
-
+        func1();
     }
 
-    void func1() {
+    static void func1() {
         Map<String, Integer> map = new WeakHashMap<>();
         map.put("s1", 1);
         map.put("s2", 2);
