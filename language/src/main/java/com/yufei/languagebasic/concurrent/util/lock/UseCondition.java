@@ -14,19 +14,7 @@ public class UseCondition {
             lock.lock();
             System.out.println("当前线程：" + Thread.currentThread().getName() + "进入等待状态..");
             Thread.sleep(3000);
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "释放锁..");
-            condition.await();    // Object wait
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "继续执行...");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    public void method2() {
-        try {
-            lock.lock();
+           git
             System.out.println("当前线程：" + Thread.currentThread().getName() + "进入..");
             Thread.sleep(3000);
             System.out.println("当前线程：" + Thread.currentThread().getName() + "发出唤醒..");
