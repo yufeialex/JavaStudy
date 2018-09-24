@@ -6,30 +6,50 @@ package com.yufei.languagebasic.concurrent.other;
  */
 public class ThreadLocalStudy {
 
-    private static ThreadLocal<String> name = new ThreadLocal<String>() {
+   /* private String name;
+    public void setTh(String value) {
+        this.name=value;
+    }
+
+    public void getTh() {
+        System.out.println(Thread.currentThread().getName() + "线程:" + this.name);
+    }
+
+    public void byBus() {
+        System.out.println(Thread.currentThread().getName() + "线程:" +"用" + name + "这个名字坐车");
+    }
+
+    public void bySubway() {
+        System.out.println(Thread.currentThread().getName() + "线程:" +"用" + name + "这个名字坐地铁");
+    }*/
+
+
+    /*private static ThreadLocal<String> name = new ThreadLocal<String>() {
         @Override
         protected String initialValue() {
             return "default";
         }
-    };
+    };*/
+
+    private static ThreadLocal<String> name = ThreadLocal.withInitial(() -> "default");
 
     public void setTh(String value) {
         name.set(value);
     }
 
     public void getTh() {
-        System.out.println(Thread.currentThread().getName() + ":" + name.get());
+        System.out.println(Thread.currentThread().getName() + "线程:" + name.get());
     }
 
     public void byBus() {
-        System.out.println("用" + name.get() + "这个名字坐车");
+        System.out.println(Thread.currentThread().getName() + "线程:" +"用" + name.get() + "这个名字坐车");
     }
 
     public void bySubway() {
-        System.out.println("用" + name.get() + "这个名字坐地铁");
+        System.out.println(Thread.currentThread().getName() + "线程:" +"用" + name.get() + "这个名字坐地铁");
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         final ThreadLocalStudy ct = new ThreadLocalStudy();
 
@@ -47,8 +67,8 @@ public class ThreadLocalStudy {
             ct.bySubway();
         }, "t2");
 
-        t1.start();
         t2.start();
+        t1.start();
     }
 
 }

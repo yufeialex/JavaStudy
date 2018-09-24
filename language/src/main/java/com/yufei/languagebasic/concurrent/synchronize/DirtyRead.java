@@ -21,23 +21,23 @@ public class DirtyRead {
 		System.out.println("setValue最终结果：username = " + username + " , password = " + password);
 	}
 
-	public void getValue() throws InterruptedException {
-//        Thread.sleep(5000); // 这里为了显示主线程读取的时候，t1线程在等待
+	public void getValue() {
+//        Thread.sleep(5000); // 这里为了显示主线程读取的时候，wifeThread线程在等待
 		System.out.println("getValue方法得到：username = " + this.username + " , password = " + this.password);
 	}
 
 	public static void main(String[] args) throws Exception {
 		final DirtyRead dr = new DirtyRead(); // 这个就是共享资源
-		Runnable ljw = () -> {
+		Runnable wifeChange = () -> {
             try {
                 dr.setValue("ljw", "456");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         };
-        new Thread(ljw).start();
-        // 这里就是为了让t1线程先启动起来，是一种模拟；模拟真实环境中的一种情况。
-        // 如果不设置，那么主线程先执行，拿到的是原来的结果，都是对的。主线程在取值的时候，t1线程要等待
+        new Thread(wifeChange, "wifeThread").start();
+        // 这里就是为了让wifeThread线程先启动起来，是一种模拟；模拟真实环境中的一种情况。
+        // 如果不设置，那么主线程先执行，拿到的是原来的结果，都是对的。主线程在取值的时候，wifeThread线程要等待
 		Thread.sleep(1000);
 		dr.getValue();
 	}
