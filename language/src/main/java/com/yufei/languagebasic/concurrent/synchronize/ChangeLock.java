@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.synchronize.sync006;
+package com.yufei.languagebasic.concurrent.synchronize;
 
 /**
  * 锁对象的改变问题

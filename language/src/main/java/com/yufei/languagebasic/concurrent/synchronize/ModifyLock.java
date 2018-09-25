@@ -1,4 +1,4 @@
-package com.yufei.languagebasic.concurrent.synchronize.sync006;
+package com.yufei.languagebasic.concurrent.synchronize;
 
 /**
  * 同一对象属性的修改不会影响锁的情况
