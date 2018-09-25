@@ -2,6 +2,9 @@ package com.yufei.languagebasic.concurrent.util.countdownLatch2;
 
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * 这是一个单独的示例
+ */
 public class UseCountDownLatch {
 
     public static void main(String[] args) {
