@@ -1,18 +1,22 @@
-package com.yufei.languagebasic.io.fileStreamIO;
+package com.petrichor.javastudy.common.util;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
-/**
- * Created by XinYufei on 2017/2/27.
- */
-public class FileOperation {
+public class FileUtil {
 
     public static void readToBuffer(StringBuffer buffer, String filePath)
             throws IOException {
         String line; // 用来保存每行读取的内容
         // 用流和流的读写
 //		InputStream is = new FileInputStream(filePath);
-//		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//		BufferedReader reader = new BufferedReader(new InputStreamReader(is "utf-8"), 10 * 1024 * 1024);//10M缓存
 
         // 用文件和文件的读写
         File is = new File(filePath);
