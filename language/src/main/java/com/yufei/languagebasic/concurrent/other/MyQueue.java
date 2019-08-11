@@ -18,7 +18,7 @@ public class MyQueue {
     private final int maxSize;
 
     //4 构造方法
-    public MyQueue(int size) {
+    private MyQueue(int size) {
         this.maxSize = size;
     }
 
@@ -27,7 +27,7 @@ public class MyQueue {
 
     // put(anObject): 把anObject加到BlockingQueue里,如果BlockQueue没有空间,
     // 则调用此方法的线程被阻断，直到BlockingQueue里面有空间再继续.
-    public void put(Object obj) {
+    private void put(Object obj) {
         synchronized (lock) {
             while (count.get() == this.maxSize) {
                 try {
@@ -48,7 +48,7 @@ public class MyQueue {
 
     //take: 取走BlockingQueue里排在首位的对象,若BlockingQueue为空,
     // 阻断进入等待状态直到BlockingQueue有新的数据被加入.
-    public Object take() {
+    private Object take() {
         Object ret = null;
         synchronized (lock) {
 //			这里不能用if，因为阻塞之后，会再次判断条件，如果还是满足条件，那么会再次wait；但是if就直接跳到后面执行了
@@ -70,7 +70,7 @@ public class MyQueue {
         return ret;
     }
 
-    public int getSize() {
+    private int getSize() {
         return this.count.get();
     }
 

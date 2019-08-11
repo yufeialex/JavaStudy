@@ -1,6 +1,6 @@
-/**
- * Meituan.com Inc.
- * Copyright (c) 2010-2018 All Rights Reserved.
+/*
+  Meituan.com Inc.
+  Copyright (c) 2010-2018 All Rights Reserved.
  */
 package com.yufei.languagebasic.concurrent.timeout;
 
@@ -19,10 +19,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class AwaitTermination {
     static class Task implements Runnable {
-        public String name;
-        private int   time;
+        String name;
+        private int time;
 
-        public Task(String s, int t) {
+        Task(String s, int t) {
             name = s;
             time = t;
         }

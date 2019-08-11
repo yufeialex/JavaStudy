@@ -3,7 +3,7 @@ package com.yufei.languagebasic.concurrent.executors.useExecutor;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class MyRejected implements RejectedExecutionHandler {
+class MyRejected implements RejectedExecutionHandler {
 
 
     public MyRejected() {

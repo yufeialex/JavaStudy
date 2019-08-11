@@ -5,26 +5,29 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
+/**
+ * 读读共享,读写互斥,写写互斥
+ */
 public class UseReentrantReadWriteLock {
 
     private ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
     private ReadLock readLock = rwLock.readLock();
     private WriteLock writeLock = rwLock.writeLock();
 
-    public void read() {
+    private void read() {
         common(readLock);
     }
 
-    public void write() {
+    private void write() {
         common(writeLock);
     }
 
     private void common(Lock lock) {
         try {
             lock.lock();
-            System.out.println("当前线程:" + Thread.currentThread().getName() + "进入...");
+            System.out.println(Thread.currentThread().getName() + "进入...");
             Thread.sleep(3000);
-            System.out.println("当前线程:" + Thread.currentThread().getName() + "退出...");
+            System.out.println(Thread.currentThread().getName() + "退出...");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -49,6 +52,5 @@ public class UseReentrantReadWriteLock {
 
         t3.start();
         t4.start();
-
     }
 }

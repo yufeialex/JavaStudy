@@ -5,14 +5,14 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Created by XinYufei on 2018/1/8.
  */
-public abstract class BaseHealthChecker implements Runnable {
+abstract class BaseHealthChecker implements Runnable {
 
     private CountDownLatch _latch;
     private String _serviceName;
     private boolean _serviceUp;
 
     //Get latch object in constructor so that after completing the task, thread can countDown() the latch
-    public BaseHealthChecker(String serviceName, CountDownLatch latch) {
+    BaseHealthChecker(String serviceName, CountDownLatch latch) {
         super();
         this._latch = latch;
         this._serviceName = serviceName;
@@ -34,7 +34,7 @@ public abstract class BaseHealthChecker implements Runnable {
         }
     }
 
-    public String getServiceName() {
+    String getServiceName() {
         return _serviceName;
     }
 
@@ -43,5 +43,5 @@ public abstract class BaseHealthChecker implements Runnable {
     }
 
     //This method needs to be implemented by all specific service checker
-    public abstract void verifyService();
+    protected abstract void verifyService();
 }

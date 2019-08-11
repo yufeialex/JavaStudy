@@ -37,17 +37,13 @@ public class CurrentThreadJoin {
         });
 
         t.start();
-        try
-
-        {
+        try {
             //t.join();
             //Thread.currentThread().join(1000);
             Thread.currentThread().join();
             System.out.println("++");
         } catch (
-                InterruptedException e)
-
-        {
+                InterruptedException e) {
             e.printStackTrace();
         }
     }

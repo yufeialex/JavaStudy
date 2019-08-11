@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class List2Map {
-    class Account{
+class List2Map {
+    class Account {
         private Long Id;
         private String username;
 
-        public Long getId() {
+        Long getId() {
             return Id;
         }
 
@@ -19,7 +19,7 @@ public class List2Map {
             Id = id;
         }
 
-        public String getUsername() {
+        String getUsername() {
             return username;
         }
 

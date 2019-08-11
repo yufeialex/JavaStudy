@@ -1,6 +1,6 @@
-/**
- * Meituan.com Inc.
- * Copyright (c) 2010-2018 All Rights Reserved.
+/*
+  Meituan.com Inc.
+  Copyright (c) 2010-2018 All Rights Reserved.
  */
 package com.yufei.languagebasic.concurrent.timeout;
 
@@ -36,8 +36,8 @@ public class JoinTest {
 }
 
 class Task implements Runnable {
-    public String name;
-    private int   time;
+    private String name;
+    private int time;
 
     public Task(String s, int t) {
         name = s;

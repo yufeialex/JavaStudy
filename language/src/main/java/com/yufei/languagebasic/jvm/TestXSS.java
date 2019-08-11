@@ -12,7 +12,7 @@ public class TestXSS {
 
     }
 
-    public static void infinitelyRecursiveMethod(long a) {
+    private static void infinitelyRecursiveMethod(long a) {
         System.out.println(count++);
         infinitelyRecursiveMethod(a);
     }

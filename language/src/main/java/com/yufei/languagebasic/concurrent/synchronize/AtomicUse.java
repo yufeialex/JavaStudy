@@ -13,7 +13,7 @@ public class AtomicUse {
     /**
      * synchronized
      */
-    public synchronized int multiAdd() {
+    private synchronized int multiAdd() {
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -33,9 +33,7 @@ public class AtomicUse {
 
         List<Thread> ts = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            ts.add(new Thread(() -> {
-                System.out.println(au.multiAdd());
-            }));
+            ts.add(new Thread(() -> System.out.println(au.multiAdd())));
         }
 
         ts.forEach(Thread::start);

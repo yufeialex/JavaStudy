@@ -19,7 +19,7 @@ import java.util.concurrent.Future;
  * Created by XinYufei on 2018/1/12.
  */
 public class RequestProdb implements Runnable {
-    public static String doGet(String url, Map<String, String> param) {
+    private static String doGet(String url, Map<String, String> param) {
 
         // 创建Httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();

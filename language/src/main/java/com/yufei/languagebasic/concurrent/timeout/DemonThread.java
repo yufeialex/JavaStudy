@@ -1,6 +1,6 @@
-/**
- * Meituan.com Inc.
- * Copyright (c) 2010-2018 All Rights Reserved.
+/*
+  Meituan.com Inc.
+  Copyright (c) 2010-2018 All Rights Reserved.
  */
 package com.yufei.languagebasic.concurrent.timeout;
 
@@ -16,9 +16,9 @@ import java.util.List;
 public class DemonThread {
     static class Task implements Runnable {
         private String name;
-        private int    time;
+        private int time;
 
-        public Task(String s, int t) {
+        Task(String s, int t) {
             name = s;
             time = t;
         }
@@ -44,9 +44,9 @@ public class DemonThread {
     static class Daemon implements Runnable {
         List<Runnable> tasks = new ArrayList<Runnable>();
         private Thread thread;
-        private int    time;
+        private int time;
 
-        public Daemon(Thread r, int t) {
+        Daemon(Thread r, int t) {
             thread = r;
             time = t;
         }

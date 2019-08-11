@@ -11,7 +11,7 @@ public class TestMaxSupportThreads {
             this.number = number;
         }
 
-        public TestThread(int number, int stackSize) {
+        TestThread(int number, int stackSize) {
             super(null, null, "Thread-Hi-" + number, stackSize);
             this.number = number;
         }

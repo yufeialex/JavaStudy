@@ -1,6 +1,6 @@
 package com.yufei.languagebasic.concurrent.executors.useExecutor;
 
-public class MyTask implements Runnable {
+class MyTask implements Runnable {
 
     private int taskId;
     private String taskName;

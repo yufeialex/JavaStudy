@@ -1,7 +1,7 @@
 package com.yufei.languagebasic.concurrent.util.cyclicBarrier3;
 
-/**
- * Created by XinYufei on 2018/1/12.
+/*
+  Created by XinYufei on 2018/1/12.
  */
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package com.yufei.languagebasic.concurrent.design.design014;
 
-public class FutureClient {
+class FutureClient {
 
     public Future request(final String queryStr) {
         //1 我想要一个代理对象（Data接口的实现类）先返回给发送请求的客户端，告诉他请求已经接收到，可以做其他的事情

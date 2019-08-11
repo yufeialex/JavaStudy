@@ -1,6 +1,6 @@
 package com.yufei.languagebasic.concurrent.design.test;
 
-public class Task {
+class Task {
     private int id;
     private String name;
     private int price;

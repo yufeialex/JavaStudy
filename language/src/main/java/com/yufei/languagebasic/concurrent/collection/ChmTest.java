@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
  * Created by XinYufei on 2018/1/19.
  */
 public class ChmTest {
-    public static ConcurrentHashMap publishProgress = new ConcurrentHashMap<String, Integer>();
+    private static ConcurrentHashMap publishProgress = new ConcurrentHashMap<String, Integer>();
 
     public static void main(String[] args) {
         ExecutorService es = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());

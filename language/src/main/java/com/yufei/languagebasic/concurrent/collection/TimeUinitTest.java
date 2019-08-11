@@ -10,7 +10,7 @@ public class TimeUinitTest {
         tut.outInfo();
     }
 
-    public void outInfo() {
+    private void outInfo() {
         System.out.println(timeUnit.name());
         System.out.println(timeUnit.toDays(1));
         System.out.println(timeUnit.toHours(1));

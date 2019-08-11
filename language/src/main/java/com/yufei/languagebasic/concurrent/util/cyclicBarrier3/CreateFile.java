@@ -45,7 +45,7 @@ public class CreateFile {
 //        fd.rename("F:\\java学习", "视频教程", "JavaSE视频教程");
     }
 
-    public void create() throws IOException {
+    private void create() throws IOException {
         DecimalFormat df = new DecimalFormat("000");
         File file = new File("D:\\java学习");
         boolean b = file.exists();

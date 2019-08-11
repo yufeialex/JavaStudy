@@ -3,7 +3,7 @@ package com.yufei.languagebasic.concurrent.collection;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
-public class User implements Delayed {
+class User implements Delayed {
 
     private String name;
     //身份证  

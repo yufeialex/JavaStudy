@@ -35,6 +35,7 @@ public class CFutureTest {
 
     /**
      * 手动启动一个线程，在run方法最后加一个completeExceptionally方法，就可以在主线程中等待了。
+     *
      * @throws Exception
      */
     public static void test2() throws Exception {
@@ -179,7 +180,7 @@ public class CFutureTest {
 
     }
 
-    public static void test7() throws Exception {
+    private static void test7() throws Exception {
 
         CompletableFuture<Integer> completableFuture1 = CompletableFuture.supplyAsync(() -> {
             //模拟执行耗时任务

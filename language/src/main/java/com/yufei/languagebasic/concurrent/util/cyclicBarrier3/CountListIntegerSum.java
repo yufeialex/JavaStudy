@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
  * @author 飞雪无情
  * @since 2010-7-12
  */
-public class CountListIntegerSum {
+class CountListIntegerSum {
     private long sum;//存放整数的和
     private CyclicBarrier barrier;//障栅集合点(同步器)
     private List<Integer> list;//整数集合List
@@ -62,10 +62,10 @@ public class CountListIntegerSum {
      *
      * @author lishuai
      */
-    public class SubIntegerSumTask implements Runnable {
+    class SubIntegerSumTask implements Runnable {
         private List<Integer> subList;
 
-        public SubIntegerSumTask(List<Integer> subList) {
+        SubIntegerSumTask(List<Integer> subList) {
             this.subList = subList;
         }
 
@@ -89,11 +89,11 @@ public class CountListIntegerSum {
 
     }
 
-    /**
-     *
-     *
-     *
-     * 以前写过类似这样的东西 但是没有CyclicBarrier类
+    /*
+
+
+
+      以前写过类似这样的东西 但是没有CyclicBarrier类
      ExecutorService 的 shutdown 方法应该在 barrier.await(); 前面
 
      发现的问题：

@@ -14,7 +14,7 @@ public class PhantomRefTest2 {
     private static ReferenceQueue<MyObject> phanQueue = new ReferenceQueue<>();
     private static Map<Reference<MyObject>, String> map = new HashMap<>();
 
-    public static class MyObject {
+    static class MyObject {
 
         @Override
         protected void finalize() throws Throwable {
@@ -28,7 +28,7 @@ public class PhantomRefTest2 {
         }
     }
 
-    public static class CheckRefQueue implements Runnable {
+    static class CheckRefQueue implements Runnable {
         Reference<MyObject> obj = null;
 
         @Override

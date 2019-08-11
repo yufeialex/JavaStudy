@@ -33,20 +33,20 @@ public class ThreadLocalStudy {
 
     private static ThreadLocal<String> name = ThreadLocal.withInitial(() -> "default");
 
-    public void setTh(String value) {
+    private void setTh(String value) {
         name.set(value);
     }
 
-    public void getTh() {
+    private void getTh() {
         System.out.println(Thread.currentThread().getName() + "线程:" + name.get());
     }
 
-    public void byBus() {
-        System.out.println(Thread.currentThread().getName() + "线程:" +"用" + name.get() + "这个名字坐车");
+    private void byBus() {
+        System.out.println(Thread.currentThread().getName() + "线程:" + "用" + name.get() + "这个名字坐车");
     }
 
-    public void bySubway() {
-        System.out.println(Thread.currentThread().getName() + "线程:" +"用" + name.get() + "这个名字坐地铁");
+    private void bySubway() {
+        System.out.println(Thread.currentThread().getName() + "线程:" + "用" + name.get() + "这个名字坐地铁");
     }
 
     public static void main(String[] args) {

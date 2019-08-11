@@ -3,7 +3,7 @@ package com.yufei.languagebasic.concurrent.synchronize;
 /**
  * 死锁问题，在设计程序时就应该避免双方相互持有对方的锁的情况
  *
- * @author alienware
+
  */
 public class DeadLock implements Runnable {
 
@@ -11,7 +11,7 @@ public class DeadLock implements Runnable {
     private static Object lock1 = new Object();
     private static Object lock2 = new Object();
 
-    public void setTag(String tag) {
+    private void setTag(String tag) {
         this.tag = tag;
     }
 

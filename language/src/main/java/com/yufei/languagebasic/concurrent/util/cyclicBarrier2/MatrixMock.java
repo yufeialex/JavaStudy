@@ -6,7 +6,7 @@ import java.util.Random;
  * Created by XinYufei on 2018/1/8.
  */
 
-public class MatrixMock {
+class MatrixMock {
     private int[][] data;
 
     public MatrixMock(int size, int length, int number) {

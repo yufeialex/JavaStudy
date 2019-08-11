@@ -1,6 +1,6 @@
-/**
- * Meituan.com Inc.
- * Copyright (c) 2010-2018 All Rights Reserved.
+/*
+  Meituan.com Inc.
+  Copyright (c) 2010-2018 All Rights Reserved.
  */
 package com.yufei.languagebasic.concurrent.collection;
 
@@ -11,9 +11,9 @@ package com.yufei.languagebasic.concurrent.collection;
  * @version $Id: Task.java, v 0.1 2018-06-09 下午3:22 @xinyufei $$
  */
 
-public class Task implements Comparable<Task> {
+class Task implements Comparable<Task> {
 
-    private int    id;
+    private int id;
     private String name;
 
     public int getId() {

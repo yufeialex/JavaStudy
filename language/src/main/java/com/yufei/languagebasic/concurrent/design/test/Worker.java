@@ -3,7 +3,7 @@ package com.yufei.languagebasic.concurrent.design.test;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class Worker implements Runnable {
+class Worker implements Runnable {
 
     private ConcurrentLinkedQueue<Task> workQueue;
     private ConcurrentHashMap<String, Object> resultMap;

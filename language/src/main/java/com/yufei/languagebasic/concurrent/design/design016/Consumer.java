@@ -3,7 +3,7 @@ package com.yufei.languagebasic.concurrent.design.design016;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
-public class Consumer implements Runnable {
+class Consumer implements Runnable {
 
     private BlockingQueue<Data> queue;
 

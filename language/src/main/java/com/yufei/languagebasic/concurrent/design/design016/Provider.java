@@ -5,7 +5,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Provider implements Runnable {
+class Provider implements Runnable {
 
     //共享缓存区
     private BlockingQueue<Data> queue;

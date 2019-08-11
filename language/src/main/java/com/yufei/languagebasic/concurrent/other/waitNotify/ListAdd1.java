@@ -9,11 +9,11 @@ public class ListAdd1 {
     // 需要通信就要有共同的东西，大家都能访问到的，这里是用了list
     private volatile static List<String> list = new ArrayList<>();
 
-    public void add() {
+    private void add() {
         list.add("bjsxt");
     }
 
-    public int size() {
+    private int size() {
         return list.size();
     }
 

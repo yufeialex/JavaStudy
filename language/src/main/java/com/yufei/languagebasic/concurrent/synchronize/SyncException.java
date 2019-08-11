@@ -3,19 +3,18 @@ package com.yufei.languagebasic.concurrent.synchronize;
 /**
  * synchronized异常
  *
- * @author alienware
+
  */
 public class SyncException {
 
     private int i = 0;
 
-    public synchronized void operation() {
+    private synchronized void operation() {
         while (true) {
             try {
                 i++;
                 Thread.sleep(100);
-                System.out.println(Thread.currentThread().getName() + " , i = "
-                        + i);
+                System.out.println(Thread.currentThread().getName() + " , i = " + i);
                 if (i == 20) {
                     Integer.parseInt("a");
                     // throw new RuntimeException();
@@ -30,10 +29,7 @@ public class SyncException {
     }
 
     public static void main(String[] args) {
-
-        final SyncException se = new SyncException();
-        Thread t1 = new Thread(() -> se.operation(), "t1");
-        t1.start();
+        new Thread(new SyncException()::operation, "t1").start();
     }
 
 }

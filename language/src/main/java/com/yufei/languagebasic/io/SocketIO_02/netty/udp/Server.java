@@ -1,4 +1,3 @@
-
 package com.yufei.languagebasic.io.SocketIO_02.netty.udp;
 
 import io.netty.bootstrap.Bootstrap;
@@ -9,21 +8,21 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 
 
 public class Server {
-    public void run(int port) throws Exception {
-    	EventLoopGroup group = new NioEventLoopGroup();
-		try {
-		    Bootstrap b = new Bootstrap();
-		    b.group(group).channel(NioDatagramChannel.class) // 类型和tcp不一样
-			    .option(ChannelOption.SO_BROADCAST, true)
-			    .handler(new ServerHandler());
-		    b.bind(port).sync().channel().closeFuture().await();
-		} finally {
-		    group.shutdownGracefully();
-		}
+    private void run(int port) throws Exception {
+        EventLoopGroup group = new NioEventLoopGroup();
+        try {
+            Bootstrap b = new Bootstrap();
+            b.group(group).channel(NioDatagramChannel.class) // 类型和tcp不一样
+                    .option(ChannelOption.SO_BROADCAST, true)
+                    .handler(new ServerHandler());
+            b.bind(port).sync().channel().closeFuture().await();
+        } finally {
+            group.shutdownGracefully();
+        }
     }
 
     public static void main(String[] args) throws Exception {
-		new Server().run(8765);
-		new Server().run(8764);
+        new Server().run(8765);
+        new Server().run(8764);
     }
 }

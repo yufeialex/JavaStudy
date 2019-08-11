@@ -5,7 +5,7 @@ package com.yufei.languagebasic.jvm;
  * 10w数据
  * Created by XinYufei on 2018/1/11.
  */
-public class IOBind {
+class IOBind {
 //    public static void main(String[] args) {
 //        final ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args);
 //        int cpuCount = Runtime.getRuntime().availableProcessors();

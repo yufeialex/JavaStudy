@@ -11,7 +11,7 @@ import java.util.concurrent.*;
 public class UseFuture2 implements Callable<String> {
     private String knowledgeGraphName;
 
-    public UseFuture2(String knowledgeGraphName) {
+    private UseFuture2(String knowledgeGraphName) {
         this.knowledgeGraphName = knowledgeGraphName;
     }
 

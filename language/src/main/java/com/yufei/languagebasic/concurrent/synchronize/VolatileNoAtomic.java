@@ -3,10 +3,11 @@ package com.yufei.languagebasic.concurrent.synchronize;
 /**
  * volatile关键字不具备synchronized关键字的原子性（同步）
  *
- * @author alienware
  */
 public class VolatileNoAtomic extends Thread {
-    private static volatile int count; // 其实就是volatile修饰的变量只能读同步，写不能同步
+
+    //其实就是volatile修饰的变量只能读同步，写不能同步
+    private static volatile int count;
 
     //	private static AtomicInteger count = new AtomicInteger(0);
     private static void addCount() {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
  * Created by XinYufei on 2017/12/26.
  */
 public class Lambda {
-    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+    private static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
         Map<Object, Boolean> map = new HashMap<>();
 //        Map<Object, Boolean> map = new ConcurrentHashMap<>();
         return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
@@ -21,12 +20,12 @@ public class Lambda {
 
     public static void main(String[] args) {
         ArrayList<Map> docs = new ArrayList<>();
-        for(int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 100000; i++) {
             HashMap<Object, Object> a = new HashMap<>();
             a.put("docId", i);
             docs.add(a);
         }
-        for(int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 100000; i++) {
             HashMap<Object, Object> a = new HashMap<>();
             a.put("docId", i);
             docs.add(a);

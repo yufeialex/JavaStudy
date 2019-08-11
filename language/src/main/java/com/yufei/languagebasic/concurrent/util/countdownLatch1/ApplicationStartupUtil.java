@@ -25,7 +25,7 @@ public class ApplicationStartupUtil {
         return INSTANCE;
     }
 
-    public static boolean checkExternalServices() throws Exception {
+    private static boolean checkExternalServices() throws Exception {
         //Initialize the latch with number of service checkers
         _latch = new CountDownLatch(3);
 

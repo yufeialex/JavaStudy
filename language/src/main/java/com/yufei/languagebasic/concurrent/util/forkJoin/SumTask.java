@@ -9,12 +9,12 @@ import java.util.concurrent.RecursiveTask;
  */
 class SumTask extends RecursiveTask<Long> {
 
-    static final int THRESHOLD = 100;
-    long[] array;
-    int start;
-    int end;
+    private static final int THRESHOLD = 100;
+    private long[] array;
+    private int start;
+    private int end;
 
-    SumTask(long[] array, int start, int end) {
+    private SumTask(long[] array, int start, int end) {
         this.array = array;
         this.start = start;
         this.end = end;

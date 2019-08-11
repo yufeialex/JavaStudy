@@ -1,6 +1,6 @@
-/**
- * Meituan.com Inc.
- * Copyright (c) 2010-2018 All Rights Reserved.
+/*
+  Meituan.com Inc.
+  Copyright (c) 2010-2018 All Rights Reserved.
  */
 package com.yufei.languagebasic;
 
@@ -11,7 +11,7 @@ import java.util.Properties;
 
 /**
  * <p>
- *     打印Java的系统变量
+ * 打印Java的系统变量
  * </p>
  *
  * @author java
@@ -20,7 +20,7 @@ import java.util.Properties;
 public class PrintSystemProperty {
     public static void main(String[] args) {
         Map<String, String> map = System.getenv();
-        for (Iterator<String> itr = map.keySet().iterator(); itr.hasNext();) {
+        for (Iterator<String> itr = map.keySet().iterator(); itr.hasNext(); ) {
             String key = itr.next();
             System.out.println(key + "  =  " + map.get(key));
         }

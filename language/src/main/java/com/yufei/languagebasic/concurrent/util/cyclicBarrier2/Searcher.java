@@ -1,13 +1,13 @@
 package com.yufei.languagebasic.concurrent.util.cyclicBarrier2;
 
-/**
- * Created by XinYufei on 2018/1/8.
+/*
+  Created by XinYufei on 2018/1/8.
  */
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
-public class Searcher implements Runnable {
+class Searcher implements Runnable {
     private int firstRow;
     private int lastRow;
     private MatrixMock mock;

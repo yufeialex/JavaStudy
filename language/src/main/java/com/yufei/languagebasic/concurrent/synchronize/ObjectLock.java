@@ -2,15 +2,12 @@ package com.yufei.languagebasic.concurrent.synchronize;
 
 /**
  * 使用synchronized代码块加锁,比较灵活
- *
- * @author alienware
  */
 public class ObjectLock {
-    // 这里就是有一个类里有好几个方法都需要加锁，但是希望它们能同时被调用，
-    // 那么就用别的对象给它加锁，因为一般加锁只能用自身这个对象嘛，
-    // 加上自己的类也才两个，那就再new一个Object对象就行了
+    // 如果类里有多个方法都需要加锁，但它们能彼此不互斥，可以并行被调用，就不可以在方法上加synchronize。因为这样用的都是this加锁。
+    // 那么就用别的对象给它加锁，因为只要有对象，就是可以作为一个锁。
 
-    public void method1() {
+    private void method1() {
         synchronized (this) { // 对象锁
             try {
                 System.out.println("do method1..");
@@ -21,7 +18,7 @@ public class ObjectLock {
         }
     }
 
-    public void method2() { // 类锁
+    private void method2() { // 类锁
         synchronized (ObjectLock.class) {
             try {
                 System.out.println("do method2..");
@@ -32,9 +29,9 @@ public class ObjectLock {
         }
     }
 
-    private Object lock = new Object();
+    private final Object lock = new Object();
 
-    public void method3() { // 任何对象锁
+    private void method3() { // 任何对象锁
         synchronized (lock) {
             try {
                 System.out.println("do method3..");

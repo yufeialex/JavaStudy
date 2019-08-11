@@ -1,11 +1,7 @@
 package com.yufei.languagebasic.io.SocketIO_02.netty.serialization;
 
-import java.io.File;
-import java.io.FileInputStream;
-
 import com.yufei.languagebasic.io.SocketIO_03.netty.dataCommunication.MarshallingCodecFactory;
 import com.yufei.languagebasic.io.SocketIO_03.utils.GzipUtils;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -13,6 +9,9 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 public class Client {
 
@@ -38,7 +37,7 @@ public class Client {
             req.setRequestMessage("数据信息" + i);
 
             String path = System.getProperty("user.dir") + File.separatorChar + "sources" + File.separatorChar
-                          + "001.jpg";
+                    + "001.jpg";
             File file = new File(path);
             FileInputStream in = new FileInputStream(file);
             byte[] data = new byte[in.available()];

@@ -31,7 +31,7 @@ class ConstantsClass {
     public static final int VALUE = 123;
 }
 
-public class MethodHandleClass {
+class MethodHandleClass {
     static {
         System.out.println("MethodHandleClass init");
     }

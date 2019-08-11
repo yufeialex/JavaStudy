@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class PhantomRefTest {
     private static ReferenceQueue<MyObject> phanQueue = new ReferenceQueue<>();
 
-    public static class MyObject {
+    static class MyObject {
 
         @Override
         protected void finalize() throws Throwable {
@@ -27,7 +27,7 @@ public class PhantomRefTest {
         }
     }
 
-    public static class CheckRefQueue implements Runnable {
+    static class CheckRefQueue implements Runnable {
         Reference<MyObject> obj = null;
 
         @Override

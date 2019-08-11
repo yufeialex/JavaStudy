@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class Master {
+class Master {
 
     //1 应该有一个承装任务的集合
     private ConcurrentLinkedQueue<Task> workQueue = new ConcurrentLinkedQueue<Task>();

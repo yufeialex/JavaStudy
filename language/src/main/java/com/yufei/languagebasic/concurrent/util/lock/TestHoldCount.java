@@ -11,7 +11,7 @@ public class TestHoldCount {
     //重入锁
     private ReentrantLock lock = new ReentrantLock();
 
-    public void m1() {
+    private void m1() {
         try {
             lock.lock();
             System.out.println("进入m1方法，holdCount数为：" + lock.getHoldCount());
@@ -26,7 +26,7 @@ public class TestHoldCount {
         }
     }
 
-    public void m2() {
+    private void m2() {
         try {
             lock.lock();
             System.out.println("进入m2方法，holdCount数为：" + lock.getHoldCount());

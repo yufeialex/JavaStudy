@@ -2,8 +2,6 @@ package com.yufei.languagebasic.concurrent.synchronize;
 
 /**
  * 锁对象的改变问题
- *
- * @author alienware
  */
 public class ChangeLock {
 

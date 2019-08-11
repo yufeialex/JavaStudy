@@ -5,7 +5,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Created by XinYufei on 2018/1/8.
  */
-public class Player implements Runnable {
+class Player implements Runnable {
 
     private int id;
     private CountDownLatch begin;

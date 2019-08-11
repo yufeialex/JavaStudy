@@ -9,7 +9,7 @@ import java.util.List;
  * Created by XinYufei on 2018/1/11.
  */
 public class MaxThreadsMain {
-    public static final int BATCH_SIZE = 4000;
+    private static final int BATCH_SIZE = 4000;
 
     public static void main(String... args) throws InterruptedException {
         List<Thread> threads = new ArrayList<>();

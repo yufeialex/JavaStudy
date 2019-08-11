@@ -16,21 +16,21 @@ public class ArraysTest {
     }
 
     void sortFunc() {
-        int a[] = new int[] { 1, 9, 5, 4, 6, 4, 7, 1 };
+        int a[] = new int[]{1, 9, 5, 4, 6, 4, 7, 1};
         Arrays.sort(a);
         System.out.println(Arrays.toString(a));
 
-        String str[] = { "s2", "s4", "s1", "s3" };
+        String str[] = {"s2", "s4", "s1", "s3"};
         Arrays.sort(str);
         System.out.println(Arrays.toString(str));
 
         // 默认使用元素自己的compare方法
-        Person1 persons[] = new Person1[] { new Person1("zzh", 18), new Person1("jj", 17), new Person1("qq", 19) };
+        Person1 persons[] = new Person1[]{new Person1("zzh", 18), new Person1("jj", 17), new Person1("qq", 19)};
         Arrays.sort(persons);
         System.out.println(Arrays.toString(persons));
 
         // 自定义类型排序，自己重写comparator
-        Person2 persons2[] = new Person2[] { new Person2("zzh", 18), new Person2("jj", 17), new Person2("qq", 19) };
+        Person2 persons2[] = new Person2[]{new Person2("zzh", 18), new Person2("jj", 17), new Person2("qq", 19)};
         Arrays.sort(persons2, new Comparator<Person2>() {
 
             @Override
@@ -57,7 +57,7 @@ public class ArraysTest {
         String str2[] = Arrays.copyOf(str, str.length);
         System.out.println(Arrays.toString(str2));
 
-        String str1[] = { "s2", "s4", "s1", "s3", null };
+        String str1[] = {"s2", "s4", "s1", "s3", null};
         String str3[] = Arrays.copyOf(str1, str1.length);
         System.out.println(Arrays.equals(str1, str3));
     }

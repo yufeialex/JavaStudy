@@ -3,14 +3,13 @@ package com.yufei.languagebasic.concurrent.synchronize;
 /**
  * synchronized的重入
  *
- * @author alienware
  */
 public class SyncReentry2 {
 
-    static class Main {
-        public int i = 10;
+    static class Parent {
+        int i = 10;
 
-        public synchronized void operationSup() {
+        synchronized void operationSup() {
             try {
                 i--;
                 System.out.println("Main print i = " + i);
@@ -21,8 +20,8 @@ public class SyncReentry2 {
         }
     }
 
-    static class Sub extends Main {
-        public synchronized void operationSub() {
+    static class Sub extends Parent {
+        synchronized void operationSub() {
             try {
                 while (i > 0) {
                     i--;
@@ -37,13 +36,10 @@ public class SyncReentry2 {
     }
 
     public static void main(String[] args) {
-
-        Thread t1 = new Thread(() -> {
+        new Thread(() -> {
             Sub sub = new Sub();
             sub.operationSub();
-        });
-
-        t1.start();
+        }).start();
     }
 
 }

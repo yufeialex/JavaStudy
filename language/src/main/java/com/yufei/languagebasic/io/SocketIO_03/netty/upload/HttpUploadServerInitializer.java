@@ -1,4 +1,3 @@
-
 package com.yufei.languagebasic.io.SocketIO_03.netty.upload;
 
 import io.netty.channel.ChannelInitializer;
@@ -9,7 +8,7 @@ import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
 import io.netty.handler.ssl.SslContext;
 
-public class HttpUploadServerInitializer extends ChannelInitializer<SocketChannel> {
+class HttpUploadServerInitializer extends ChannelInitializer<SocketChannel> {
 
     private final SslContext sslCtx;
 

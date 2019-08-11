@@ -11,7 +11,7 @@ public class Main {
     static class MyClassLoader extends ClassLoader {
         private String classPath;
 
-        public MyClassLoader(String classPath) {
+        MyClassLoader(String classPath) {
             this.classPath = classPath;
         }
 

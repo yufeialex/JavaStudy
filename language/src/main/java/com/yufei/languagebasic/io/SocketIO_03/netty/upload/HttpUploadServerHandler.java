@@ -1,44 +1,15 @@
-
 package com.yufei.languagebasic.io.SocketIO_03.netty.upload;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.codec.http.Cookie;
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.FullHttpResponse;
-import io.netty.handler.codec.http.HttpContent;
-import io.netty.handler.codec.http.HttpHeaderNames;
-import io.netty.handler.codec.http.HttpHeaderUtil;
-import io.netty.handler.codec.http.HttpHeaderValues;
-import io.netty.handler.codec.http.HttpMethod;
-import io.netty.handler.codec.http.HttpObject;
-import io.netty.handler.codec.http.HttpRequest;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.HttpVersion;
-import io.netty.handler.codec.http.LastHttpContent;
-import io.netty.handler.codec.http.QueryStringDecoder;
-import io.netty.handler.codec.http.ServerCookieDecoder;
-import io.netty.handler.codec.http.ServerCookieEncoder;
-import io.netty.handler.codec.http.multipart.Attribute;
-import io.netty.handler.codec.http.multipart.DefaultHttpDataFactory;
-import io.netty.handler.codec.http.multipart.DiskAttribute;
-import io.netty.handler.codec.http.multipart.DiskFileUpload;
-import io.netty.handler.codec.http.multipart.FileUpload;
-import io.netty.handler.codec.http.multipart.HttpDataFactory;
-import io.netty.handler.codec.http.multipart.HttpPostRequestDecoder;
+import io.netty.channel.*;
+import io.netty.handler.codec.http.*;
+import io.netty.handler.codec.http.multipart.*;
 import io.netty.handler.codec.http.multipart.HttpPostRequestDecoder.EndOfDataDecoderException;
 import io.netty.handler.codec.http.multipart.HttpPostRequestDecoder.ErrorDataDecoderException;
-import io.netty.handler.codec.http.multipart.InterfaceHttpData;
 import io.netty.handler.codec.http.multipart.InterfaceHttpData.HttpDataType;
 import io.netty.util.CharsetUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Collections;
@@ -49,9 +20,9 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static io.netty.buffer.Unpooled.*;
+import static io.netty.buffer.Unpooled.copiedBuffer;
 
-public class HttpUploadServerHandler extends SimpleChannelInboundHandler<HttpObject> {
+class HttpUploadServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
     private static final Logger logger = Logger.getLogger(HttpUploadServerHandler.class.getName());
 
@@ -65,14 +36,14 @@ public class HttpUploadServerHandler extends SimpleChannelInboundHandler<HttpObj
             new DefaultHttpDataFactory(DefaultHttpDataFactory.MINSIZE); // Disk if size exceed
 
     private HttpPostRequestDecoder decoder;
-    
+
     static {
         DiskFileUpload.deleteOnExitTemporaryFile = true; // should delete file
-                                                         // on exit (in normal
-                                                         // exit)
+        // on exit (in normal
+        // exit)
         DiskFileUpload.baseDirectory = "D:" + File.separatorChar + "aa"; // system temp directory
         DiskAttribute.deleteOnExitTemporaryFile = true; // should delete file on
-                                                        // exit (in normal exit)
+        // exit (in normal exit)
         DiskAttribute.baseDirectory = "D:" + File.separatorChar + "aa"; // system temp directory
     }
 
@@ -123,8 +94,8 @@ public class HttpUploadServerHandler extends SimpleChannelInboundHandler<HttpObj
 
             QueryStringDecoder decoderQuery = new QueryStringDecoder(request.uri());
             Map<String, List<String>> uriAttributes = decoderQuery.parameters();
-            for (Entry<String, List<String>> attr: uriAttributes.entrySet()) {
-                for (String attrVal: attr.getValue()) {
+            for (Entry<String, List<String>> attr : uriAttributes.entrySet()) {
+                for (String attrVal : attr.getValue()) {
                     responseContent.append("URI: " + attr.getKey() + '=' + attrVal + "\r\n");
                 }
             }
@@ -229,7 +200,7 @@ public class HttpUploadServerHandler extends SimpleChannelInboundHandler<HttpObj
             } catch (IOException e1) {
                 // Error while reading data from File, only print name and error
                 e1.printStackTrace();
-                
+
                 responseContent.append("\r\nBODY Attribute: " + attribute.getHttpDataType().name() + ": "
                         + attribute.getName() + " Error while reading value: " + e1.getMessage() + "\r\n");
                 return;
@@ -242,22 +213,22 @@ public class HttpUploadServerHandler extends SimpleChannelInboundHandler<HttpObj
                         + attribute + "\r\n");
             }
         } else {
-        	responseContent.append("\r\n -----------start-------------" + "\r\n");
+            responseContent.append("\r\n -----------start-------------" + "\r\n");
             responseContent.append("\r\nBODY FileUpload: " + data.getHttpDataType().name() + ": " + data
                     + "\r\n");
             responseContent.append("\r\n ------------end------------" + "\r\n");
             if (data.getHttpDataType() == HttpDataType.FileUpload) {
                 FileUpload fileUpload = (FileUpload) data;
                 if (fileUpload.isCompleted()) {
-                	
-                	System.out.println("file name : " + fileUpload.getFilename());
-                	System.out.println("file length: " + fileUpload.length());
-                	System.out.println("file maxSize : " + fileUpload.getMaxSize());
-                	System.out.println("file path :" + fileUpload.getFile().getPath());
-                	System.out.println("file absolutepath :" + fileUpload.getFile().getAbsolutePath());
-                	System.out.println("parent path :" + fileUpload.getFile().getParentFile());
-                	
-                    if (fileUpload.length() < 1024*1024*10) {
+
+                    System.out.println("file name : " + fileUpload.getFilename());
+                    System.out.println("file length: " + fileUpload.length());
+                    System.out.println("file maxSize : " + fileUpload.getMaxSize());
+                    System.out.println("file path :" + fileUpload.getFile().getPath());
+                    System.out.println("file absolutepath :" + fileUpload.getFile().getAbsolutePath());
+                    System.out.println("parent path :" + fileUpload.getFile().getParentFile());
+
+                    if (fileUpload.length() < 1024 * 1024 * 10) {
                         responseContent.append("\tContent of file\r\n");
                         try {
                             //responseContent.append(fileUpload.getString(fileUpload.getCharset()));

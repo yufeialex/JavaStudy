@@ -22,7 +22,7 @@ class SuperClass extends SSClass {
 
     public static int value = 123;
 
-    public SuperClass() {
+    SuperClass() {
         System.out.println("init SuperClass");
     }
 }

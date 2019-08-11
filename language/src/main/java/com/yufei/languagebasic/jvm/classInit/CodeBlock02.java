@@ -10,7 +10,7 @@ public class CodeBlock02 {
         System.out.println("第一代码块");
     }
 
-    public CodeBlock02() {
+    private CodeBlock02() {
         System.out.println("构造方法");
     }
 

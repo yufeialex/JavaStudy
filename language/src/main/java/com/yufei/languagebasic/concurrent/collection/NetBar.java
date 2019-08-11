@@ -6,15 +6,15 @@ public class NetBar implements Runnable {
 
     private DelayQueue<User> queue = new DelayQueue<>();
 
-    public boolean yinye = true;
+    private boolean yinye = true;
 
-    public void shangji(String name, String id, int money) {
+    private void shangji(String name, String id, int money) {
         User man = new User(name, id, 1000 * money + System.currentTimeMillis());
         System.out.println("网名" + man.getName() + " 身份证" + man.getId() + "交钱" + money + "块,开始上机...");
         this.queue.add(man);
     }
 
-    public void xiaji(User man) {
+    private void xiaji(User man) {
         System.out.println("网名" + man.getName() + " 身份证" + man.getId() + "时间到下机...");
     }
 

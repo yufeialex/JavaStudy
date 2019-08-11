@@ -3,7 +3,7 @@ package com.yufei.languagebasic.string;
 import java.util.stream.Stream;
 
 public class StringFunction {
-//    public static void main是因为静态的不需要创建实例
+    //    public static void main是因为静态的不需要创建实例
     public static void main(String[] args) {
         StringFunction sf = new StringFunction();
         sf.splitTest();
@@ -13,7 +13,7 @@ public class StringFunction {
     }
 
     // 前面的逗号都是有意义的，后面的逗号是没有意义的
-    public void splitTest() {
+    private void splitTest() {
         String a = ",北京";
         String b = "北京,";
         String[] splita = a.split(","); // 长度2，""和北京

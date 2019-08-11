@@ -3,7 +3,7 @@ package com.yufei.languagebasic.concurrent.util.cyclicBarrier2;
 /**
  * Created by XinYufei on 2018/1/8.
  */
-public class Results {
+class Results {
     private int[] data;
 
     public Results(int size) {

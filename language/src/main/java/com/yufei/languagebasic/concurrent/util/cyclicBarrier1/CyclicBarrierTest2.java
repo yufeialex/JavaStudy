@@ -7,7 +7,7 @@ import java.util.concurrent.CyclicBarrier;
  */
 public class CyclicBarrierTest2 {
 
-    static CyclicBarrier c = new CyclicBarrier(2, new A());
+    private static CyclicBarrier c = new CyclicBarrier(2, new A());
 
     public static void main(String[] args) {
         new Thread(() -> {

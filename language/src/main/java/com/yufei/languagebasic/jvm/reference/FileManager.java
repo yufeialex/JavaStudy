@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by XinYufei on 2018/1/3.
  */
-public class FileManager {
+class FileManager {
     private Map<String, SoftReference<File>> imageCache = new HashMap<String, SoftReference<File>>();
 
     //保存File的软引用到HashMap

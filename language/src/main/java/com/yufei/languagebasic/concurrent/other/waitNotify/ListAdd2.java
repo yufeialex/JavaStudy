@@ -6,16 +6,16 @@ import java.util.List;
 /**
  * wait notfiy 方法，wait释放锁，notfiy不释放锁
  *
- * @author alienware
+
  */
 public class ListAdd2 {
     private volatile static List<String> list = new ArrayList<>();
 
-    public void add() {
+    private void add() {
         list.add("bjsxt");
     }
 
-    public int size() {
+    private int size() {
         return list.size();
     }
 

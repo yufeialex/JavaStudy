@@ -9,10 +9,10 @@ package com.yufei.languagebasic.jvm.classInit;
  * 5. 自身成员变量赋值和自身块赋值
  * 6. 自身构造函数赋值
  * Created by XinYufei on 2018/1/10.
- *
+ * <p>
  * 在嵌套初始化时有一个特别的逻辑。特别是内嵌的这个变量恰好是个静态成员，而且是本类的实例。
-   这会导致一个有趣的现象：“实例初始化竟然出现在静态初始化之前”。
-   其实并没有提前，你要知道java记录初始化与否的时机。
+ *   这会导致一个有趣的现象：“实例初始化竟然出现在静态初始化之前”。
+ *   其实并没有提前，你要知道java记录初始化与否的时机。
  */
 public class StaticTest {
     public static void main(String[] args) {
@@ -33,18 +33,18 @@ public class StaticTest {
         System.out.println("2");
     }
 
-    StaticTest() {
+    private StaticTest() {
         System.out.println("3");
         System.out.println("a=" + a + ",b=" + b);
     }
 
-    public static void staticFunction() {
+    private static void staticFunction() {
         System.out.println("4");
     }
 
-    int a = 110;
+    private int a = 110;
     // 类的准备阶段需要做是为类变量分配内存并设置默认值，因此类变量st为null、b为0
-    static int b = 112;
+    private static int b = 112;
     // 类变量是final，编译时javac将会为value生成ConstantValue属性，
     // 在准备阶段虚拟机就会根据ConstantValue的设置将变量设置为指定的值，那么在准备阶段b的值就是112，而不再是0了
 //    static final int b = 112;

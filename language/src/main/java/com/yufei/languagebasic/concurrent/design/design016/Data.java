@@ -1,6 +1,6 @@
 package com.yufei.languagebasic.concurrent.design.design016;
 
-public final class Data {
+final class Data {
 
     private String id;
     private String name;

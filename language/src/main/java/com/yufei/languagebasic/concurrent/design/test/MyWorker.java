@@ -1,6 +1,6 @@
 package com.yufei.languagebasic.concurrent.design.test;
 
-public class MyWorker extends Worker {
+class MyWorker extends Worker {
 
     public static Object handle(Task input) {
         Object output = null;

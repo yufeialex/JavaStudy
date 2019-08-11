@@ -9,14 +9,14 @@ public class UseCondition {
     private Lock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
 
-    public void method1() {
+    private void method1() {
         try {
             lock.lock();
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "进入等待状态..");
+            System.out.println(Thread.currentThread().getName() + "进入等待状态..");
             Thread.sleep(3000);
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "释放锁..");
+            System.out.println(Thread.currentThread().getName() + "await，释放锁..");
             condition.await();    // Object wait
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "继续执行...");
+            System.out.println(Thread.currentThread().getName() + "await收到信号，继续执行...");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -24,13 +24,15 @@ public class UseCondition {
         }
     }
 
-    public void method2() {
+    private void method2() {
         try {
             lock.lock();
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "进入..");
+            System.out.println(Thread.currentThread().getName() + "进入..");
             Thread.sleep(3000);
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "发出唤醒..");
+            System.out.println(Thread.currentThread().getName() + "发出唤醒..");
+            // 不会立刻释放锁。会等自己结束
             condition.signal();        //Object notify
+            Thread.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -38,10 +40,10 @@ public class UseCondition {
         }
     }
 
-    public void method3() {
+    private void method3() {
         try {
             lock.lock();
-            System.out.println("当前线程：" + Thread.currentThread().getName() + "进入..");
+            System.out.println(Thread.currentThread().getName() + "进入..");
             Thread.sleep(3000);
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,14 +53,10 @@ public class UseCondition {
     }
 
     public static void main(String[] args) {
-
         final UseCondition uc = new UseCondition();
-        Thread t1 = new Thread(uc::method1, "t1");
-        Thread t2 = new Thread(uc::method2, "t2");
-        Thread t3 = new Thread(uc::method3, "t3");
-        t1.start();
-        t2.start();
-        t3.start();
+        new Thread(uc::method1, "t1").start();
+        new Thread(uc::method2, "t2").start();
+        new Thread(uc::method3, "t3").start();
     }
 
 

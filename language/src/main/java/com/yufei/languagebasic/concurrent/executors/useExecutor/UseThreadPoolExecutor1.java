@@ -54,7 +54,7 @@ public class UseThreadPoolExecutor1 {
         aa();
     }
 
-    public static void aa() {
+    private static void aa() {
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         int a = 0;
         while (a < 10) {

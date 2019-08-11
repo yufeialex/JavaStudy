@@ -1,19 +1,14 @@
-
 package com.yufei.languagebasic.io.SocketIO_03.netty.upload;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.codec.http.HttpContent;
-import io.netty.handler.codec.http.HttpHeaderUtil;
-import io.netty.handler.codec.http.HttpObject;
-import io.netty.handler.codec.http.HttpResponse;
-import io.netty.handler.codec.http.LastHttpContent;
+import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 
 /**
  * Handler that just dumps the contents of the response from the server
  */
-public class HttpUploadClientHandler extends SimpleChannelInboundHandler<HttpObject> {
+class HttpUploadClientHandler extends SimpleChannelInboundHandler<HttpObject> {
 
     private boolean readingChunks;
 

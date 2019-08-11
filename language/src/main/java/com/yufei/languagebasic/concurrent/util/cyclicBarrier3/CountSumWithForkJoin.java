@@ -1,7 +1,7 @@
 package com.yufei.languagebasic.concurrent.util.cyclicBarrier3;
 
-/**
- * Created by XinYufei on 2018/1/12.
+/*
+  Created by XinYufei on 2018/1/12.
  */
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class CountSumWithForkJoin {
         private int start;
         private int end;
 
-        public CountTask(int start, int end) {
+        CountTask(int start, int end) {
             this.start = start;
             this.end = end;
         }

@@ -15,10 +15,10 @@ import java.util.concurrent.*;
  */
 public class FileSizeCalc {
     static class SubDirsAndSize {
-        public final long size;
-        public final List<File> subDirs;
+        final long size;
+        final List<File> subDirs;
 
-        public SubDirsAndSize(long size, List<File> subDirs) {
+        SubDirsAndSize(long size, List<File> subDirs) {
             this.size = size;
             this.subDirs = Collections.unmodifiableList(subDirs);
         }

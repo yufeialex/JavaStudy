@@ -1,6 +1,6 @@
 package com.yufei.languagebasic.concurrent.design.design015;
 
-public class Task {
+class Task {
 
     private int id;
     private int price;

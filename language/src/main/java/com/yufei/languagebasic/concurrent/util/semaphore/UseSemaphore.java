@@ -4,9 +4,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
+/**
+ * 资源可以被并行访问，但是访问数量有限制的时候
+ */
 public class UseSemaphore {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // 线程池  
         ExecutorService exec = Executors.newCachedThreadPool();
         // 只能5个线程同时访问  
@@ -24,15 +27,11 @@ public class UseSemaphore {
                     // 访问完后，释放
                     semp.release();
                 } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
                 }
             });
         }
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        Thread.sleep(10);
         System.out.println(semp.getQueueLength());
 
         // 退出线程池  

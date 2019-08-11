@@ -19,76 +19,76 @@ import java.util.concurrent.TimeUnit;
  */
 public class Client {
 
-	// 单例模式
-	private static class SingletonHolder {
-		static final Client instance = new Client();
-	}
-	
-	public static Client getInstance(){
-		return SingletonHolder.instance;
-	}
-	
-	private EventLoopGroup group;
-	private Bootstrap b;
-	private ChannelFuture cf ;
-	
-	private Client(){
-			group = new NioEventLoopGroup();
-			b = new Bootstrap();
-			b.group(group)
-			 .channel(NioSocketChannel.class)
-			 .handler(new LoggingHandler(LogLevel.INFO))
-			 .handler(new ChannelInitializer<SocketChannel>() {
-					@Override
-					protected void initChannel(SocketChannel sc) throws Exception {
-						sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingDecoder());
-						sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingEncoder());
-						//超时handler（当服务器端与客户端在指定时间以上没有任何进行通信，则会关闭响应的通道，主要为减小服务端资源占用）
-						sc.pipeline().addLast(new ReadTimeoutHandler(5)); 
-						sc.pipeline().addLast(new ClientHandler());
-					}
-		    });
-	}
-	
-	public void connect(){
-		try {
-			this.cf = b.connect("127.0.0.1", 8765).sync();
-			System.out.println("远程服务器已经连接, 可以进行数据交换..");				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public ChannelFuture getChannelFuture(){
-		
-		if(this.cf == null){
-			this.connect();
-		}
-		if(!this.cf.channel().isActive()){
-			this.connect();
-		}
-		
-		return this.cf;
-	}
-	
-	public static void main(String[] args) throws Exception{
-		final Client c = Client.getInstance();
-		//c.connect();
-		
-		ChannelFuture cf = c.getChannelFuture();
-		for(int i = 1; i <= 3; i++ ){
-			Request request = new Request();
-			request.setId("" + i);
-			request.setName("pro" + i);
-			request.setRequestMessage("数据信息" + i);
-			cf.channel().writeAndFlush(request);
-			TimeUnit.SECONDS.sleep(4);
-		}
+    // 单例模式
+    private static class SingletonHolder {
+        static final Client instance = new Client();
+    }
 
-		cf.channel().closeFuture().sync();
-		
-		
-		new Thread(() -> {
+    private static Client getInstance() {
+        return SingletonHolder.instance;
+    }
+
+    private EventLoopGroup group;
+    private Bootstrap b;
+    private ChannelFuture cf;
+
+    private Client() {
+        group = new NioEventLoopGroup();
+        b = new Bootstrap();
+        b.group(group)
+                .channel(NioSocketChannel.class)
+                .handler(new LoggingHandler(LogLevel.INFO))
+                .handler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    protected void initChannel(SocketChannel sc) throws Exception {
+                        sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingDecoder());
+                        sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingEncoder());
+                        //超时handler（当服务器端与客户端在指定时间以上没有任何进行通信，则会关闭响应的通道，主要为减小服务端资源占用）
+                        sc.pipeline().addLast(new ReadTimeoutHandler(5));
+                        sc.pipeline().addLast(new ClientHandler());
+                    }
+                });
+    }
+
+    private void connect() {
+        try {
+            this.cf = b.connect("127.0.0.1", 8765).sync();
+            System.out.println("远程服务器已经连接, 可以进行数据交换..");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ChannelFuture getChannelFuture() {
+
+        if (this.cf == null) {
+            this.connect();
+        }
+        if (!this.cf.channel().isActive()) {
+            this.connect();
+        }
+
+        return this.cf;
+    }
+
+    public static void main(String[] args) throws Exception {
+        final Client c = Client.getInstance();
+        //c.connect();
+
+        ChannelFuture cf = c.getChannelFuture();
+        for (int i = 1; i <= 3; i++) {
+            Request request = new Request();
+            request.setId("" + i);
+            request.setName("pro" + i);
+            request.setRequestMessage("数据信息" + i);
+            cf.channel().writeAndFlush(request);
+            TimeUnit.SECONDS.sleep(4);
+        }
+
+        cf.channel().closeFuture().sync();
+
+
+        new Thread(() -> {
             try {
                 System.out.println("进入子线程...");
                 ChannelFuture cf1 = c.getChannelFuture();
@@ -107,11 +107,10 @@ public class Client {
                 e.printStackTrace();
             }
         }).start();
-		
-		System.out.println("断开连接,主线程结束..");
-		
-	}
-	
-	
-	
+
+        System.out.println("断开连接,主线程结束..");
+
+    }
+
+
 }

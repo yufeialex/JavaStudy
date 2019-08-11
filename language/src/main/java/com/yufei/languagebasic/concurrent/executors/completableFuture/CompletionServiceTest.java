@@ -116,7 +116,7 @@ public class CompletionServiceTest {
      * <p>
      * 解决了已完成任务得不到及时处理的问题
      */
-    static void case3() throws InterruptedException, ExecutionException {
+    private static void case3() throws InterruptedException, ExecutionException {
         Random random = new Random();
 
         ExecutorService service = Executors.newFixedThreadPool(10);
