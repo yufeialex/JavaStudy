@@ -1,21 +1,26 @@
 package com.petrichor.java.zakka.picture;
 
+
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.concurrent.*;
 
 public class PicClassify {
     private static final Logger logger = LoggerFactory.getLogger(PicClassify.class);
 
-    private static final HashSet<String> picTypes = new HashSet<>(Arrays.asList(".jpg", ".bmp", ".jpeg", ".png", ".gif", ".JPG", ".BMP", ".JPEG", ".PNG", ".GIF"));
+    private static final HashSet<String> picTypes = new HashSet<>(Arrays.asList("jpg", "bmp", "jpeg", "png", "gif", "JPG", "BMP", "JPEG", "PNG", "GIF"));
 
     //        分为计算类型，IO类型 线程MAX数量计算类型推荐N+1 I/O类型 推荐使用cpu数量*2
 //    private static final ExecutorService pool = Executors.newFixedThreadPool(1024);
@@ -47,7 +52,7 @@ public class PicClassify {
 
 
     public static void main(String[] args) throws Exception {
-        File dir = new File("F:\\图片\\handler");
+        File dir = new File("J:\\sesede\\TAS22");
         long start = System.currentTimeMillis();
 
         checkFile(dir);
@@ -105,7 +110,7 @@ public class PicClassify {
             return;
         }
 
-        String extension = picture.getName().substring(i);
+        String extension = picture.getName().substring(i + 1);
         // 非图片不处理
         if (!picTypes.contains(extension)) {
             return;
@@ -114,19 +119,59 @@ public class PicClassify {
 
         FileInputStream picInputStream = new FileInputStream(picture);
 
-        // 使用BufferedImage
+        // 方法1：使用BufferedImage
 //        BufferedImage sourceImg = ImageIO.read(picInputStream);
+//        logger.info("{} 宽： {}, 高：{}", picture.getName(), sourceImg.getWidth(), sourceImg.getHeight());
 
-        // 使用JpegInfoReader
-        ImageInfo sourceImg = JpegInfoReader.getImageInfo(picInputStream);
+
+        // 方法2：使用JpegInfoReader
+        /*ImageInfo sourceImg = JpegInfoReader.getImageInfo(picInputStream);
         // 非jpeg不处理
         if (sourceImg == null) {
             return;
         }
-
         logger.info("{} 宽： {}, 高：{}", picture.getName(), sourceImg.getWidth(), sourceImg.getHeight());
+        boolean isVertical = sourceImg.getWidth() < sourceImg.getHeight();*/
 
-        boolean isVertical = sourceImg.getWidth() < sourceImg.getHeight();
+
+        // 方法3：使用第三方包
+        /*Metadata metadata = ImageMetadataReader.readMetadata(picInputStream);
+        Directory directory = null;
+        switch (extension) {
+            case ".PNG":
+            case ".png":
+                directory = metadata.getFirstDirectoryOfType(PngDirectory.class);
+                break;
+            default:
+                directory = metadata.getFirstDirectoryOfType(JpegDirectory.class);
+        }
+        long height = directory.getLong(JpegDirectory.TAG_IMAGE_HEIGHT);
+        long weight = directory.getLong(JpegDirectory.TAG_IMAGE_WIDTH);
+        logger.info("{} 宽： {}, 高：{}", picture.getName(), weight, height);
+        boolean isVertical = weight < height;*/
+
+        /*for (Directory directory : metadata.getDirectories()) {
+            for (Tag tag : directory.getTags()) {
+                //格式化输出[directory.getName()] - tag.getTagName() = tag.getDescription()
+                System.out.format("[%s] - %s = %s\n",
+                        directory.getName(), tag.getTagName(), tag.getDescription());
+            }
+            if (directory.hasErrors()) {
+                for (String error : directory.getErrors()) {
+                    System.err.format("ERROR: %s", error);
+                }
+            }
+        }*/
+
+        // 方法4： imageReader
+        Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName(extension);
+        ImageReader reader = readers.next();
+        ImageInputStream iis = ImageIO.createImageInputStream(picture);
+        reader.setInput(iis, true);
+        logger.info("{} 宽： {}, 高：{}", picture.getName(), reader.getWidth(0), reader.getHeight(0));
+        boolean isVertical = reader.getWidth(0) < reader.getHeight(0);
+        iis.close();
+
         picInputStream.close();
         if (!isVertical) {
             return;
