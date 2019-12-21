@@ -93,6 +93,8 @@ class LazySingleton {
 class DoubleCheckedLockingSingleton {
     // java中使用双重检查锁定机制,由于Java编译器和JIT的优化的原因系统无法保证我们期望的执行次序。
     // 在java5.0修改了内存模型,使用volatile声明的变量可以强制屏蔽编译器和JIT的优化工作
+
+
     private static volatile DoubleCheckedLockingSingleton uniqueInstance;
     private String name;
 
@@ -102,10 +104,15 @@ class DoubleCheckedLockingSingleton {
     // 提供一个全局的静态方法
     // 为了效率，只在创建时候加锁，以后不需要锁定
     public static DoubleCheckedLockingSingleton getInstance() {
+        /**
+         * 因为指令重排，所以线程2在线程1完成对象的初始化之前就可能得到了对象的引用。
+         * 因为创建对象分3步，分配内存，赋值，返回引用，用volatile，禁止这3个指令重排序。
+         * 任何新的线程都不会拿到没有赋值的引用。
+         */
         if (uniqueInstance == null) {
             // 锁的粒度比较小；以后亦不会再用到这个锁了
             synchronized (DoubleCheckedLockingSingleton.class) {
-                // 可能前两个线程都进来了，所以要再判断一遍；这里只会执行一遍
+                // 可能有多个线程等待锁，所以锁内部要再判断一遍；这里只会执行一遍
                 if (uniqueInstance == null) {
                     uniqueInstance = new DoubleCheckedLockingSingleton();
                 }

@@ -22,5 +22,9 @@ public class HashMapStudy {
         // shallow copy
 //        mapCopy = new HashMap<>(originalMap);
 //        mapCopy = (HashMap) originalMap.clone();
+
+        HashMap<Object, Object> a = new HashMap<>();
+        a.put(null, 1);
+        a.put(null, 2);
     }
 }
