@@ -1,12 +1,13 @@
-package com.petrichor.java.language.other;
+package com.petrichor.java.language.emunstudy;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-import static com.petrichor.java.language.other.EnumStudy.CodeLanguage.PYTHON;
-import static com.petrichor.java.language.other.EnumStudy.CodeLanguage.SHELL;
-import static com.petrichor.java.language.other.EnumStudy.DemandStatus.UNTREATED;
+import static com.petrichor.java.language.emunstudy.EnumStudy.CodeLanguage.PYTHON;
+import static com.petrichor.java.language.emunstudy.EnumStudy.CodeLanguage.SHELL;
+import static com.petrichor.java.language.emunstudy.EnumStudy.DemandStatus.UNTREATED;
 
 
 @Data
@@ -68,11 +69,16 @@ public class EnumStudy {
 
     public static DemandStatus toStatus(int status) {
         DemandStatus[] values = DemandStatus.values();
+
         for (int i = 0; i < values.length; i++) {
             if (status == i) {
                 return values[i];
             }
         }
+
+        ArrayList<Object> list = new ArrayList<>();
+        ArrayList<Object> objects = new ArrayList<>();
+        ArrayList<Object> objects1 = new ArrayList<>();
         return values[0];
     }
 

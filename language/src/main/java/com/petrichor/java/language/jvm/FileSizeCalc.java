@@ -4,7 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 线程池设置为CPU核心数+1个，这个运行结果是大象在工作电脑(CPU：G630 内存：4G JDK1.7.0_51)上跑出来的。如果在这里把线程池加大，
@@ -46,19 +49,14 @@ public class FileSizeCalc {
         final int poolSize = cpuCore + 1;
         ExecutorService service = Executors.newFixedThreadPool(poolSize);
         long total = 0;
-        List<File> directories = new ArrayList<File>();
+        List<File> directories = new ArrayList<>();
         directories.add(file);
-        SubDirsAndSize subDirsAndSize = null;
+        SubDirsAndSize subDirsAndSize;
         try {
             while (!directories.isEmpty()) {
-                List<Future<SubDirsAndSize>> partialResults = new ArrayList<Future<SubDirsAndSize>>();
+                List<Future<SubDirsAndSize>> partialResults = new ArrayList<>();
                 for (final File directory : directories) {
-                    partialResults.add(service.submit(new Callable<SubDirsAndSize>() {
-                        @Override
-                        public SubDirsAndSize call() throws Exception {
-                            return getSubDirsAndSize(directory);
-                        }
-                    }));
+                    partialResults.add(service.submit(() -> getSubDirsAndSize(directory)));
                 }
                 directories.clear();
                 for (Future<SubDirsAndSize> partialResultFuture : partialResults) {
